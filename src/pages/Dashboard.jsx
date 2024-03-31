@@ -4,12 +4,13 @@ import { useRoutes } from 'react-router-dom';
 import DashNav from '../components/dashboardComponents/DashNav'
 
 import CardsTable from './dashboard/CardsTable'
+import CreateNewCardPersonal from './dashboard/CreateNewCardPersonal';
 
 function Dashboard() {
    const routes = [
       { path: 'cards-table', element: <CardsTable /> },
-      // { path: 'card-type', element: <CardType /> }, 
-      // Add more routes as needed
+      { path: 'cards-table/create-new-card-personal', element: <CreateNewCardPersonal/> }, 
+      // { path: 'cards-table/create-new-card-business', element: <CreateNewCardBUsiness /> }, 
    ];
 
    const routing = useRoutes(routes);

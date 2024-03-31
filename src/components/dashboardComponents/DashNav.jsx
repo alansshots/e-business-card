@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import { User, Copy, ShoppingBag, FastForward } from 'react-feather'
 
@@ -24,41 +25,32 @@ function DashNav() {
             <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
                <div class="flex-1 px-3 bg-white divide-y space-y-1">
                   <ul class="space-y-2 pb-2">
-                     {/* <li>
-                        <a href="#" class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group">
-                           <svg class="w-6 h-6 text-gray-500 group-hover:text-gray-900 transition duration-75" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                              <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                           </svg>
-                           <span class="ml-3">Dashboard</span>
-                        </a>
-                     </li> */}
                      <li>
-                        <a class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
+                        <Link to="cards-table" class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
                            <Copy className="w-6 h-6 text-[#013941] flex-shrink-0 transition duration-75"/>
                            <span class="ml-3 flex-1 whitespace-nowrap">Cards</span>
-                        </a>
+                        </Link>
                      </li>
                      <li>
-                        <a class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
+                        <Link class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
                            <ShoppingBag className="w-6 h-6 text-[#013941] flex-shrink-0 transition duration-75"/>
                            <span class="ml-3 flex-1 whitespace-nowrap">Accessories</span>
-                        </a>
+                        </Link>
                      </li>
                      <li>
-                        <a class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
+                        <Link class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
                            <User className="w-6 h-6 text-[#013941] flex-shrink-0 transition duration-75"/>
                            <span class="ml-3 flex-1 whitespace-nowrap">Account</span>
-                        </a>
+                        </Link>
                      </li>
                   </ul>
                   <div class="space-y-2 pt-2">
                   <ul>
                      <li>
-                        <a class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
+                        <Link class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
                            <FastForward className="w-6 h-6 text-[#013941] flex-shrink-0 transition duration-75"/>
                            <span class="ml-3 flex-1 whitespace-nowrap">Upgrade Plan </span>
-                        </a>
+                        </Link>
                      </li>
                   </ul>
                  </div>

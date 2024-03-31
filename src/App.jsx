@@ -10,7 +10,7 @@ import SignUp from './pages/SignUp';
 import Home from './pages/Home'
 
 import Dashboard from './pages/Dashboard';
-import BusinessCard from './pages/BusinessCard';
+import BusinessCard from './pages/Card';
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
         <Route path ='/sign-up' element={<SignUp/>}/>  
         
         <Route path ='/dashboard/*' element={<Dashboard/>}/>  
-        <Route path ='/business-card' element={<BusinessCard/>}/>  
+        <Route path ='/card' element={<BusinessCard/>}/>  
       </Routes>
     </>
   )

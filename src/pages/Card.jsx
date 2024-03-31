@@ -7,13 +7,13 @@ import GitHub from '../assets/GitHubLogo.png';
 import Profile from '../assets/profile.jpg';
 
 
-function BusinessCard() {
+function Card() {
   return (
     <>
         <div className='flex flex-row justify-center items-center'>
           <div className='sm:w-[500px]'>
             <div className='relative'>
-              <div  style={{ clipPath: 'ellipse(85% 67% at 78% 22%)'}} className='bg-[#013941] h-72 w-full flex items-center justify-center relative overflow-hidden'>
+              <div  style={{ clipPath: 'ellipse(85% 67% at 78% 22%)'}} className='bg-[#013941] h-72 w-full sm:rounded-3xl flex items-center justify-center relative overflow-hidden'>
                 <div className='absolute bg-cover bg-cenwter w-full h-full' style={{ backgroundImage: `url(${Background})` }}></div>
               </div>
             <div className='absolute left-0 bottom-0'>    
@@ -69,4 +69,4 @@ function BusinessCard() {
   )
 }
 
-export default BusinessCard
+export default Card
