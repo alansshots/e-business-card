@@ -1,11 +1,35 @@
 import React from 'react'
-
-import { Link } from 'react-router-dom'
+import supabase from '../config/supabaseClient'
+import { useState } from 'react'
+import {Link, useNavigate } from 'react-router-dom'
 
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
 function SignIn() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isValid, setIsValid] = useState(null);
+  
+  async function signInWithEmail() {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    })
+
+    if(error){      
+      setIsValid(false)
+      
+      setTimeout(() => {
+        setIsValid(null);
+      }, 10000);
+    } else {
+      localStorage.setItem('accessToken', data.session.access_token);
+      navigate('/offers');
+    }
+  }
+
   return (
     <>
     <Navbar/>
@@ -16,9 +40,9 @@ function SignIn() {
           
           <form action="" className="mt-10 flex flex-col items-center justify-center w-full ">
               <div className="w-4/5">
-                {/* {isValid === false && (
-                  <p className="text-red-500 text-sm mt-1">Грешен Email или/и Парола. Моля опитайте отново.</p>
-                )} */}
+                {isValid === false && (
+                  <p className="text-red-500 text-sm my-2">Wrong Email and/or Password. Please try again.</p>
+                )}
 
                 <label htmlFor="Email" className="block flex text-sm font-semibold text-gray-700">
                   E-mail Address
@@ -29,27 +53,28 @@ function SignIn() {
                   id="email"
                   name="email"
                   className="mt-1 w-full py-1 border-2 rounded-full border-gray-200"
-                  
+                  value={email} onInput={e => setEmail(e.target.value)}
                 />
               </div>
               
               <div className="w-4/5 mt-5">
                 <label htmlFor="Password" className="block flex flex-row justify-between  text-sm font-semibold text-gray-700">
                   Password
-                  <p className='text-[#14B8A6]'>Forgot your password?</p>
+                  <p className='cursor-pointer text-[#14B8A6]'>Forgot your password ?</p>
                 </label>
 
                 <input
                   type="password"
                   id="password"
                   name="password"
-                  className="mt-1 w-full py-1 border-2 rounded-full border-gray-200"                  
+                  className="mt-1 w-full py-1 border-2 rounded-full border-gray-200"
+                  value={password} onInput={e => setPassword(e.target.value)}                  
                 />
                 
               </div>
 
               <div className="w-4/5 ">
-                <button type='button' className="w-full mt-5 py-2 w-4/5 shadow-md bg-[#14B8A6] text-white text-xl rounded-full focus:outline-none focus:ring ">
+                <button onClick={signInWithEmail} type='button' className="w-full mt-5 py-2 w-4/5 shadow-md bg-[#14B8A6] text-white text-xl rounded-full focus:outline-none focus:ring ">
                   Sign In
                 </button>
 
