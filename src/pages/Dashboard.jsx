@@ -5,12 +5,13 @@ import DashNav from '../components/dashboardComponents/DashNav'
 
 import CardsTable from './dashboard/CardsTable'
 import CreateNewCardPersonal from './dashboard/CreateNewCardPersonal';
+import CreateNewCardBusiness from './dashboard/CreateNewCardBusiness';
 
 function Dashboard() {
    const routes = [
-      { path: 'cards-table', element: <CardsTable /> },
-      { path: 'cards-table/create-new-card-personal', element: <CreateNewCardPersonal/> }, 
-      // { path: 'cards-table/create-new-card-business', element: <CreateNewCardBUsiness /> }, 
+      { path: '', element: <CardsTable /> },
+      { path: '/create-new-card-personal', element: <CreateNewCardPersonal/> }, 
+      { path: '/create-new-card-business', element: <CreateNewCardBusiness/> }, 
    ];
 
    const routing = useRoutes(routes);
@@ -22,7 +23,7 @@ function Dashboard() {
          <DashNav/>
             <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
             <div id="main-content" class="h-full w-full relative overflow-y-auto lg:ml-64">
-               <main>
+               <main className='mx-5'>
                   {routing} 
                </main>
             </div>

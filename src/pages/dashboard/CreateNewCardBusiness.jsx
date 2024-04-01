@@ -1,21 +1,17 @@
 import React from 'react'
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-
-import Card from '../Card';
 
 import Background from '../../assets/bgprofile.jpg';
 import GitHub from '../../assets/GitHubLogo.png';
 import Profile from '../../assets/profile.jpg';
 
-function CreateNewCardPersonal() {
+function CreateNewCardBusiness() {
   return (
-    <div className='flex flex-col items-center justify-center'>
-        <div className='mt-2 flex flex-row items-center justify-around w-full'>
+    <>
+        <div className='mt-2 flex flex-row items-center justify-around '>
           <div className='w-full mx-10'>
-            <div className='flex flex-row justify-between items-center'>
+            <div className='flex flex-row justify-center items-center'>
             {/* Photos */}
-            <div class="flex flex-col items-center justify-center">
+            <div class="flex flex-col items-center justify-center w-full">
               <p className='mb-1 text-gray-600'>Profile Picture</p>
                 <label for="dropzone-file" class="flex flex-col items-center justify-center w-36 h-36 border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50">
                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -28,7 +24,7 @@ function CreateNewCardPersonal() {
                     <input id="dropzone-file" type="file" class="hidden" />
                 </label>
             </div> 
-            <div class="flex flex-col items-center justify-center w-3/5">
+            <div class="flex flex-col items-center justify-center w-full">
             <p className='mb-1 text-gray-600'>Cover Photo</p>
                 <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -40,7 +36,21 @@ function CreateNewCardPersonal() {
                     </div>
                     <input id="dropzone-file" type="file" class="hidden" />
                 </label>
-            </div>  
+            </div> 
+            <div class="flex flex-col items-center justify-center w-full">
+            <p className='mb-1 text-gray-600'>Company Logo</p>
+                <label for="dropzone-file" class="flex flex-col items-center justify-center w-36 h-36 border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50">
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                        </svg>
+                        <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                        <p class="text-xs text-gray-500">SVG, PNG</p>
+                    </div>
+                    <input id="dropzone-file" type="file" class="hidden" />
+                </label>
+            </div>
+
             </div>
             {/* User Info */}
 
@@ -51,7 +61,7 @@ function CreateNewCardPersonal() {
                         <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-blue-500 block w-full p-2.5" required />
                     </div>
                     <div className='text-left'>
-                        <label for="location" class="block mb-0.5 ml-0.5 text-sm font-medium text-gray-900">Location</label>
+                        <label for="location" class="block mb-0.5 ml-0.5 text-sm font-medium text-gray-900">Company Name</label>
                         <input type="text" id="location" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required />
                     </div>    
                     <div className='text-left'>
@@ -60,7 +70,7 @@ function CreateNewCardPersonal() {
                     </div>  
                 </div>
                 <div class="mb-6 text-left">
-                    <label for="Bio" class="block mb-0.5 ml-0.5 text-sm font-medium text-gray-900">Bio</label>
+                    <label for="Bio" class="block mb-0.5 ml-0.5 text-sm font-medium text-gray-900">Company Position</label>
                     <input type="text" id="Bio" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required />
                 </div> 
 
@@ -72,8 +82,8 @@ function CreateNewCardPersonal() {
 
             </form>
           </div>
-        {/* Preview */}
-        <div className='border-2 border-gray-300 rounded-3xl shadow-2xl mr-10'>
+          {/* Preview */}
+          <div className='border-2 border-gray-300 rounded-3xl shadow-2xl mr-10'>
           <div className='flex flex-row justify-center items-center'>
           <div className='w-full'>
             <div className='relative'>
@@ -82,14 +92,17 @@ function CreateNewCardPersonal() {
               </div>
             <div className='absolute left-0 bottom-0'>    
                 <img className='h-20 w-20 ml-2 mb-5 border-4 border-white rounded-full' src={Profile} alt="" />     
+                <div className='absolute -right-7 bottom-1 z-10'>  
+                  <img className='h-12 w-12 mb-5 border-4 border-white rounded-full' src={Profile} alt="" />     
+                </div>
             </div>
           </div>
           <div className='px-2'>
           <div className='text-left px-1'>
             <h2 className='text-xl mb-2 font-semibold'>Alen Gospodinov</h2>
             <div className='w-full text-sm text-gray-600'>
-              <p>Aachen, Germany</p>
-              <p>Computer Engineering student at RWTH Aachen University </p>
+              <p>Works at Company Name</p>
+              <p>Software Engineer | Automation Systems</p>
             </div>
           </div>
             <div className='w-full flex flex-wrap flex-row justify-start items-center mt-5 ml-3'>
@@ -124,8 +137,8 @@ function CreateNewCardPersonal() {
         </div>
         </div>
         </div>
-    </div>
+    </>
   )
 }
 
-export default CreateNewCardPersonal
+export default CreateNewCardBusiness

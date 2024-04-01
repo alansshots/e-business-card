@@ -26,7 +26,7 @@ function DashNav() {
                <div class="flex-1 px-3 bg-white divide-y space-y-1">
                   <ul class="space-y-2 pb-2">
                      <li>
-                        <Link to="cards-table" class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
+                        <Link to="" class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
                            <Copy className="w-6 h-6 text-[#013941] flex-shrink-0 transition duration-75"/>
                            <span class="ml-3 flex-1 whitespace-nowrap">Cards</span>
                         </Link>
