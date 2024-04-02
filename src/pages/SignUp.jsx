@@ -135,7 +135,7 @@ function SignUp() {
               </div>
 
               <div className="w-4/5 ">
-                <button onClick={submitUserData} type='button' className="w-full mt-5 py-2 w-4/5 bg-[#14B8A6] text-white text-xl rounded-full focus:outline-none focus:ring ">
+                <button onClick={submitUserData} type='button' className="cursor-pointer w-full mt-5 py-2 w-4/5 bg-[#14B8A6] text-white text-xl rounded-full focus:outline-none focus:ring ">
                   Sign Up
                 </button>
                 <p className="text-xs mt-1 text-gray-500">

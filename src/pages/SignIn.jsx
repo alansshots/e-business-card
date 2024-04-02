@@ -26,7 +26,7 @@ function SignIn() {
       }, 10000);
     } else {
       localStorage.setItem('accessToken', data.session.access_token);
-      navigate('/offers');
+      navigate('/dashboard');
     }
   }
 
@@ -74,9 +74,9 @@ function SignIn() {
               </div>
 
               <div className="w-4/5 ">
-                <button onClick={signInWithEmail} type='button' className="w-full mt-5 py-2 w-4/5 shadow-md bg-[#14B8A6] text-white text-xl rounded-full focus:outline-none focus:ring ">
+                <div onClick={signInWithEmail} type='button' className="cursor-pointer w-full mt-5 py-2 w-4/5 shadow-md bg-[#14B8A6] text-white text-xl rounded-full focus:outline-none focus:ring ">
                   Sign In
-                </button>
+                </div>
 
                 <p className='my-5 font-semibold text-[#013941]'>OR</p>
 

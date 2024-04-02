@@ -1,9 +1,124 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
-import { User, Copy, ShoppingBag, FastForward } from 'react-feather'
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
+import supabase from '../../config/supabaseClient';
+import { User, Copy, ShoppingBag, FastForward, LogOut } from 'react-feather'
 
 function DashNav() {
+   const [isHovered, setIsHovered] = useState(false);
+   const [dropdown, setDropdown] = useState(false)
+   const [userId, setUserId] = useState(null);
+   const [user, setUser] = useState(null);
+   const navigate = useNavigate();
+   const jwt = localStorage.getItem('accessToken');
+
+   // useEffect(() => {
+   //    async function getUserData() {
+   //      const { data, error } = await supabase.auth.getUser(jwt);
+   //      if (data?.user) {
+   //        setUserId(data.user.id);
+   //      }
+   //    }
+    
+   //    if (jwt) {
+   //      getUserData();
+   //    }
+   //  }, [jwt]);
+    
+   //  useEffect(() => {
+   //    async function fetchUser() {
+   //      if (userId) {
+   //        const { data: user, error } = await supabase
+   //          .from('users')
+   //          .select()
+   //          .eq('id', userId);
+    
+   //        if (user) {
+   //          setUser(user[0]);
+   //          console.log(user);
+   //        }
+
+   //        else{
+   //          console.log(error);
+   //        }
+   //      }
+   //    }
+    
+   //    fetchUser();
+   //  }, [userId]);
+    
+
+   useEffect(() => {
+      async function getUserData() {
+        const { data, error } = await supabase.auth.getUser(jwt);
+        if (data?.user) {
+          setUserId(data.user.id);
+          fetchUser(); 
+        }
+      }
+    
+      const fetchUser = async () => {
+        // Wait for userId to be set
+        if (userId) {
+          const { data: user, error } = await supabase
+            .from('users')
+            .select()
+            .eq('id', userId);
+    
+          if (user) {
+            setUser(user[0]);
+            console.log(user[0].email)
+          }
+        }
+      };
+    
+      if (jwt) {
+        // First, get user data from auth
+        getUserData();
+        
+        // Then, fetch user data from the database
+      }
+    }, [jwt, userId]); 
+ 
+ 
+//    useEffect(() => {
+//    async function getUserData() {
+//      const { data, error } = await supabase.auth.getUser(jwt);
+//      if (data?.user) {
+//        setUserId(data.user.id);
+//      }
+//    }
+ 
+//    const fetchUser = async () => {
+//      // Wait for userId to be set
+//      if (userId) {
+//        const { data: user, error } = await supabase
+//          .from('users')
+//          .select()
+//          .eq('id', userId);
+ 
+//        if (user) {
+//          setUser(user[0]);
+//        }
+//      }
+//    };
+ 
+//    if (jwt) {
+//      // First, get user data from auth
+//      getUserData();
+     
+//      // Then, fetch user data from the database
+//      fetchUser(); 
+//    }
+//  }, [jwt, userId]);  // Added userId as a dependency
+ 
+   async function signOutUser() {
+     await supabase.auth.signOut();
+     setUser(null);
+     localStorage.setItem('accessToken', null);
+     navigate('/');
+     window.location.reload();
+   }
   return (
     <>
         <aside id="sidebar" class="fixed shadow-xl z-20 h-full top-0 left-0 pt-6 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75" aria-label="Sidebar">
@@ -37,12 +152,6 @@ function DashNav() {
                            <span class="ml-3 flex-1 whitespace-nowrap">Accessories</span>
                         </Link>
                      </li>
-                     <li>
-                        <Link class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
-                           <User className="w-6 h-6 text-[#013941] flex-shrink-0 transition duration-75"/>
-                           <span class="ml-3 flex-1 whitespace-nowrap">Account</span>
-                        </Link>
-                     </li>
                   </ul>
                   <div class="space-y-2 pt-2">
                   <ul>
@@ -54,6 +163,29 @@ function DashNav() {
                      </li>
                   </ul>
                  </div>
+               </div>
+               <div className='px-3'>
+               {jwt && user && (
+                  <Link onClick={signOutUser} class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
+                     <LogOut className="w-6 h-6 text-[#013941] flex-shrink-0 transition duration-75"/>
+                     <div className='flex flex-col items-center justify-center w-full'> 
+                        <span class="ml-3 flex-1 whitespace-nowrap">Sign out</span>
+                        <span className='text-xs'>{user.email}</span>
+                         </div>
+                  </Link>
+                        )}
+
+                        {!jwt || !user ? (
+                        <>
+                           <div>
+                              <p className='text-xs mb-2'>Please sign in/ sign up to use the dashboard</p>
+                           </div>
+                           <div className='flex flex-row items-center justify-center'>
+                              <Link to='/sign-in' className='cursor-pointer text-center bg-[#14B8A6] py-0.5 px-2 mx-2 text-md font-normal text-white rounded-full'>Sign In</Link>
+                              <Link to='/sign-up' className='cursor-pointer text-center bg-[#013941] py-0.5 px-2 mx-2 text-md font-normal text-white rounded-full'>Sign Up</Link>
+                           </div>   
+                        </>
+                        ) : null} 
                </div>
             </div>
          </div>

@@ -2,13 +2,22 @@ import React from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Card from '../Card';
+import { Plus } from 'react-feather';
+
+import LinkSearch from '../../components/dashboardComponents/LinksSearchPoUp'
 
 import Background from '../../assets/bgprofile.jpg';
 import GitHub from '../../assets/GitHubLogo.png';
 import Profile from '../../assets/profile.jpg';
 
 function CreateNewCardPersonal() {
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+
+  // Function to toggle the visibility of the popup
+  const togglePopUp = () => {
+    setIsPopUpOpen(!isPopUpOpen);
+  };
+
   return (
     <div className='flex flex-col items-center justify-center'>
         <div className='mt-2 flex flex-row items-center justify-around w-full'>
@@ -62,10 +71,19 @@ function CreateNewCardPersonal() {
                 <div class="mb-6 text-left">
                     <label for="Bio" class="block mb-0.5 ml-0.5 text-sm font-medium text-gray-900">Bio</label>
                     <input type="text" id="Bio" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required />
-                </div> 
+                </div>
+
+                <div className='text-left '>
+                  <p className='font-semibold'>Links</p>
+                  <div className='w-full flex flex-wrap flex-row justify-start items-start mt-5'>
+                      <a onClick={togglePopUp} className='mr-8 mb-2 flex flex-col flex-center items-center'>
+                        <Plus className='h-20 w-20 p-3 hover:scale-95 duration-200 cursor-pointer bg-white rounded-xl border-2 border-gray-50 shadow-xl'/>
+                      </a> 
+                  </div>
+                </div>
 
                 <div className='text-left'>
-                  <button type='button' className="mt-5 py-2 w-1/4 shadow-md bg-[#14B8A6] text-white text-xl rounded-full focus:outline-none focus:ring ">
+                  <button type='button' className="mt-5 my-5 py-2 w-1/4 shadow-md bg-[#14B8A6] text-white text-xl rounded-full focus:outline-none focus:ring ">
                     Save
                   </button>
                 </div>
@@ -124,6 +142,8 @@ function CreateNewCardPersonal() {
         </div>
         </div>
         </div>
+        
+        {isPopUpOpen && <LinkSearch onClose={togglePopUp} />}
     </div>
   )
 }
