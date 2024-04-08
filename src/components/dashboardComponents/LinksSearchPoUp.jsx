@@ -111,7 +111,7 @@ function LinksSearchPoUp({onClose}) {
 
         </div>
         </div>
-        <button className="mt-4 text-md text-[#013941] cursor-pointer" onClick={onClose}>Cancel</button>
+        
       </div>
     </div>
   )
