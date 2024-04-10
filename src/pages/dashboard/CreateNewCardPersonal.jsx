@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Plus } from 'react-feather';
+import { Link, useNavigate } from 'react-router-dom';
+import { Plus, Edit } from 'react-feather';
 import supabase from '../../config/supabaseClient'
 
 import LinkSearch from '../../components/dashboardComponents/LinksSearchPoUp'
@@ -11,10 +11,14 @@ import GitHub from '../../assets/GitHubLogo.png';
 import Profile from '../../assets/profile.jpg';
 
 function CreateNewCardPersonal() {
+  const navigate = useNavigate();
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
-
+  const [isHoveredProfile, setIsHoveredProfile] = useState(false);
+  const [isHoveredCover, setIsHoveredCover] = useState(false);
+  
+  const [loggedInUser, setLoggedInUser] = useState('');
   const [userId, setUserId] = useState(null);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState('');
   const jwt = localStorage.getItem('accessToken');
 
   const [name, setName] = useState('');
@@ -31,50 +35,111 @@ function CreateNewCardPersonal() {
     setIsPopUpOpen(!isPopUpOpen);
   };
 
-  // Profile Imgage Change 
-  // const handleImageChange = async (event) => {
-  //   const image = event.target.files[0];
-  //   setSelectedImage(image);
+  useEffect(() => {
+    async function getLoggedInUser() {
+      if (jwt) {
+        const { data, error } = await supabase.auth.getUser(jwt);
+        if (data?.user) {
+          setLoggedInUser(data.user);
+        }
+      }
+    }
     
-  //   if (image) {
-  //     try {
-  //       // Upload the image to Supabase Storage
-  //       const { data: uploadData, error: uploadError } = await supabase.storage
-  //         .from('profile_pictures')
-  //         .upload(`${loggedInUser.id}/${image.name}`, image);
-  
-  //       if (uploadError) {
-  //         throw new Error(`Error uploading image: ${uploadError.message}`);
-  //       }
-  
-  //       // Log the structure of the uploadData object
-  //       // console.log('Upload Data:', uploadData);
-  
-  //       // Get the URL of the uploaded image
-  //       const imageUrl = await supabase.storage
-  //         .from('profile_pictures')
-  //         .getPublicUrl(`${loggedInUser.id}/${image.name}`);
-  
-  //       if (!imageUrl) {
-  //         throw new Error('Image URL is null or undefined');
-  //       }
-        
-  //       // Update the user's record in the database with the new image URL
-  //       const { data: updateData, error: updateError } = await supabase
-  //         .from('users')
-  //         .update({ profile_image_url: imageUrl.data.publicUrl })
-  //         .eq('id', loggedInUser.id);
-  
-  //       if (updateError) {
-  //         throw new Error(`Error updating user record: ${updateError.message}`);
-  //       }
+    if (jwt) {
+      getLoggedInUser(); // Call the async function
+    }
+    
+  }, [jwt]);
 
-  //       setSelectedImage(imageUrl.data.publicUrl);
-  //     } catch (error) {
-  //       console.error(error.message);
-  //     }
-  //   }
-  // };
+  // Profile Imgage Change 
+  const handleProfileImageChange = async (event) => {
+    const image = event.target.files[0];
+    setSelectedProfileImage(image);
+    
+    if (image) {
+      try {
+        // Upload the image to Supabase Storage
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('profile_images')
+          .upload(`${loggedInUser.id}/${image.name}`, image);
+  
+        if (uploadError) {
+          throw new Error(`Error uploading image: ${uploadError.message}`);
+        }
+  
+        // Log the structure of the uploadData object
+        // console.log('Upload Data:', uploadData);
+  
+        // Get the URL of the uploaded image
+        const imageUrl = await supabase.storage
+          .from('profile_images')
+          .getPublicUrl(`${loggedInUser.id}/${image.name}`);
+  
+        if (!imageUrl) {
+          throw new Error('Image URL is null or undefined');
+        }
+        
+        // Update the user's record in the database with the new image URL
+        const { data: updateData, error: updateError } = await supabase
+          .from('cards')
+          .update({ profile_img_url: imageUrl.data.publicUrl })
+          .eq('user_id', loggedInUser.id);
+  
+        if (updateError) {
+          throw new Error(`Error updating user record: ${updateError.message}`);
+        }
+
+        setSelectedProfileImage(imageUrl.data.publicUrl);
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+  };
+
+    // Profile Imgage Change 
+    const handleCoverImageChange = async (event) => {
+      const image = event.target.files[0];
+      setSelectedCoverImage(image);
+      
+      if (image) {
+        try {
+          // Upload the image to Supabase Storage
+          const { data: uploadData, error: uploadError } = await supabase.storage
+            .from('cover_images')
+            .upload(`${loggedInUser.id}/${image.name}`, image);
+    
+          if (uploadError) {
+            throw new Error(`Error uploading image: ${uploadError.message}`);
+          }
+    
+          // Log the structure of the uploadData object
+          // console.log('Upload Data:', uploadData);
+    
+          // Get the URL of the uploaded image
+          const imageUrl = await supabase.storage
+            .from('cover_images')
+            .getPublicUrl(`${loggedInUser.id}/${image.name}`);
+    
+          if (!imageUrl) {
+            throw new Error('Image URL is null or undefined');
+          }
+          
+          // Update the user's record in the database with the new image URL
+          const { data: updateData, error: updateError } = await supabase
+            .from('cards')
+            .update({bg_img_url: imageUrl.data.publicUrl })
+            .eq('user_id', loggedInUser.id);
+    
+          if (updateError) {
+            throw new Error(`Error updating user record: ${updateError.message}`);
+          }
+  
+          setSelectedCoverImage(imageUrl.data.publicUrl);
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+    };
  
    useEffect(() => {
      async function getUserData() {
@@ -97,7 +162,7 @@ function CreateNewCardPersonal() {
          }
        }
      };
-   
+
      if (jwt) {
        // First, get user data from auth
        getUserData();
@@ -106,7 +171,7 @@ function CreateNewCardPersonal() {
        fetchUser();
      }
    }, [jwt, userId ]);  // Added userId as a dependency
- 
+
    async function submitNewCard() {
     //  if (!title || salary === null || !industry || !location) {
     //    console.error('Error: Title, salary, industry, and location cannot be null.');
@@ -127,10 +192,10 @@ function CreateNewCardPersonal() {
          name: name,
          created_at: date,
          phone: phone,
-         email: user.email,  
+        //  email: user.email,  
          location: location,
          bio: bio, 
-         selected_links:links
+        //  selected_links:links
        },
      ])
  
@@ -140,7 +205,7 @@ function CreateNewCardPersonal() {
      } else {
        console.log('New card created successfully:', data);
        // Handle success state
-       navigate('/cards');
+       navigate('/dashboard');
      }
    }
 
@@ -152,29 +217,99 @@ function CreateNewCardPersonal() {
             {/* Photos */}
             <div class="flex flex-col items-center justify-center">
               <p className='mb-1 text-gray-600'>Profile Picture</p>
-                <label for="dropzone-file" class="flex flex-col items-center justify-center w-36 h-36 border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50">
-                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                        <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                        </svg>
-                        <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                        {/* <p class="text-xs text-gray-500">SVG, PNG</p> */}
+                <label htmlFor="profile-pic-upload" className="flex flex-col items-center justify-center  rounded-full cursor-pointer bg-gray-50" >
+                <div
+                  className="w-36 h-36 border-2 border-gray-200 rounded-full overflow-hidden"
+                  style={{ position: 'relative' }}
+                  onMouseEnter={() => setIsHoveredProfile(true)}
+                  onMouseLeave={() => setIsHoveredProfile(false)}
+                >
+                  <img
+                    src={selectedProfileImage || user.profile_image_url || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'}
+                    alt="Profile"
+                    style={{
+                      // cursor: loggedInUser.id === user.id ? "pointer" : "default",
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center',
+                      filter: isHoveredProfile ? 'blur(2px)' : 'none',
+                      transition: 'filter 0.3s ease',
+                    }}
+                  />
+                  {isHoveredProfile ? (
+                    <div
+                      style={{
+                        cursor: "pointer",
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    >
+                      <Edit size={30} color="white" />
                     </div>
-                    <input id="dropzone-file" type="file" class="hidden" />
-                </label>
+                  ) : null}
+                </div>
+              </label>
+              { loggedInUser.id === user.id && (
+                <input
+                  id="profile-pic-upload"
+                  type="file"
+                  accept="image/jpeg, image/png, image/gif, image/svg+xml"
+                  onChange={handleProfileImageChange}
+                  style={{ display: 'none' }}
+                />
+              )}
             </div> 
+
             <div class="flex flex-col items-center justify-center w-3/5">
             <p className='mb-1 text-gray-600'>Cover Photo</p>
-                <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
-                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                        <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                        </svg>
-                        <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                        {/* <p class="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
+                <label htmlFor="cover-img-upload" className="flex flex-col items-center justify-center w-full h-44 border-2 border-gray-200 rounded-lg cursor-pointer bg-gray-50">
+                <div 
+                style={{ position: 'relative' }}
+                onMouseEnter={() => setIsHoveredCover(true)}
+                onMouseLeave={() => setIsHoveredCover(false)}
+                class="flex flex-col items-center justify-center h-full w-full">
+                  <img
+                    src={ selectedCoverImage || user.bg_img_url}
+                    className='rounded-md'
+                    style={{
+                      // cursor: loggedInUser.id === user.id ? "pointer" : "default",
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center',
+                      filter: isHoveredCover ? 'blur(2px)' : 'none',
+                      transition: 'filter 0.3s ease',
+                    }}
+                  />
+                  {isHoveredCover ? (
+                    <div
+                      style={{
+                        cursor: "pointer",
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                      }}
+                    >
+                      <Edit size={30} color="white" />
                     </div>
-                    <input id="dropzone-file" type="file" class="hidden" />
-                </label>
+                  ) : null}
+                </div>
+              </label>
+              { loggedInUser.id === user.id && (
+                <input
+                  id="cover-img-upload"
+                  type="file"
+                  accept="image/jpeg, image/png, image/gif, image/svg+xml"
+                  onChange={handleCoverImageChange}
+                  style={{ display: 'none' }}
+                />
+              )}
+
+
             </div>  
             </div>
             {/* User Info */}
@@ -222,18 +357,18 @@ function CreateNewCardPersonal() {
           <div className='w-full'>
             <div className='relative'>
               <div  style={{ clipPath: 'ellipse(85% 67% at 78% 22%)'}} className='bg-[#013941] h-48 sm:rounded-3xl flex items-center justify-center relative overflow-hidden'>
-                <div className='absolute bg-cover bg-cenwter w-full h-full' style={{ backgroundImage: `url(${Background})` }}></div>
+                <div className='absolute bg-cover bg-cenwter w-full h-full' style={{ backgroundImage: `url(${ selectedCoverImage || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'})` }}></div>
               </div>
             <div className='absolute left-0 bottom-0'>    
-                <img className='h-20 w-20 ml-2 mb-5 border-4 border-white rounded-full' src={Profile} alt="" />     
+                <img className='h-20 w-20 ml-2 mb-5 border-2 border-white rounded-full' src={selectedProfileImage || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'} alt="" />     
             </div>
           </div>
           <div className='px-2'>
           <div className='text-left px-1'>
-            <h2 className='text-xl mb-2 font-semibold'>Alen Gospodinov</h2>
+            <h2 className='text-xl mb-2 font-semibold'>{name || "Jared Dunn "}</h2>
             <div className='w-full text-sm text-gray-600'>
-              <p>Aachen, Germany</p>
-              <p>Computer Engineering student at RWTH Aachen University </p>
+              <p>{location || 'San Fancisco, CA'}</p>
+              <p>{bio || 'This guy f*cks'}</p>
             </div>
           </div>
             <div className='w-full flex flex-wrap flex-row justify-start items-center mt-5 ml-3'>
