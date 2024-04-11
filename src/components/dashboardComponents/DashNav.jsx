@@ -140,10 +140,16 @@ function DashNav() {
             <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
                <div class="flex-1 px-3 bg-white divide-y space-y-1">
                   <ul class="space-y-2 pb-2">
-                     <li>
+                     {/* <li>
                         <Link to="" class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
                            <Copy className="w-6 h-6 text-[#013941] flex-shrink-0 transition duration-75"/>
                            <span class="ml-3 flex-1 whitespace-nowrap">Cards</span>
+                        </Link>
+                     </li> */}
+                     <li>
+                        <Link to="/dashboard/my-card" class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
+                           <Copy className="w-6 h-6 text-[#013941] flex-shrink-0 transition duration-75"/>
+                           <span class="ml-3 flex-1 whitespace-nowrap">My Card</span>
                         </Link>
                      </li>
                      <li>

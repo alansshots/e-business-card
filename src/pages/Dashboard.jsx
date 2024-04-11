@@ -11,7 +11,7 @@ function Dashboard() {
    const routes = [
       { path: '', element: <CardsTable /> },
       { path: '/create-new-card-personal', element: <CreateNewCardPersonal/> }, 
-      { path: '/create-new-card-business', element: <CreateNewCardBusiness/> }, 
+      { path: '/my-card', element: <CreateNewCardBusiness/> }, 
    ];
 
    const routing = useRoutes(routes);

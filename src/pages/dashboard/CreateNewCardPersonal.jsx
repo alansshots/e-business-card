@@ -368,7 +368,7 @@ function CreateNewCardPersonal() {
             <h2 className='text-xl mb-2 font-semibold'>{name || "Jared Dunn "}</h2>
             <div className='w-full text-sm text-gray-600'>
               <p>{location || 'San Fancisco, CA'}</p>
-              <p>{bio || 'This guy f*cks'}</p>
+              <p>{bio || 'Works @ Piped Piper'}</p>
             </div>
           </div>
             <div className='w-full flex flex-wrap flex-row justify-start items-center mt-5 ml-3'>
