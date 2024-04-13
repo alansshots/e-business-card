@@ -243,7 +243,7 @@ function CreateNewCardPersonal() {
     try {
       const { data, error } = await supabase
         .from('cards')
-        .insert([
+        .update([
           {  
             user_id: userId,
             name: name,
@@ -254,7 +254,8 @@ function CreateNewCardPersonal() {
             profile_img_url: selectedProfileImage,
             bg_img_url: selectedCoverImage,
           },
-        ]);
+        ])
+        .eq('user_id', userId);
   
       if (error) {
         throw new Error(`Error creating new card: ${error.message}`);
@@ -281,7 +282,7 @@ function CreateNewCardPersonal() {
             {/* Photos */}
             <div class="flex flex-col items-center justify-center">
               <p className='mb-1 text-gray-600'>Profile Picture</p>
-                <label htmlFor="profile-pic-upload" className="flex flex-col items-center justify-center  rounded-full cursor-pointer bg-gray-50" >
+                <label htmlFor="profile-img-upload" className="flex flex-col items-center justify-center  rounded-full cursor-pointer bg-gray-50" >
                 <div
                   className="w-36 h-36 border-2 border-gray-200 rounded-full overflow-hidden"
                   style={{ position: 'relative' }}
@@ -316,7 +317,7 @@ function CreateNewCardPersonal() {
                   ) : null}
                 </div>
               </label>
-              {/* { loggedInUser.id === user.id && ( */}
+              { loggedInUser.id === user.id && (
                 <input
                   id="profile-img-upload"
                   type="file"
@@ -324,7 +325,7 @@ function CreateNewCardPersonal() {
                   onChange={handleProfileImageChange}
                   style={{ display: 'none' }}
                 />
-              {/* )} */}
+              )}
             </div> 
 
             <div class="flex flex-col items-center justify-center w-3/5">
@@ -372,8 +373,7 @@ function CreateNewCardPersonal() {
                   style={{ display: 'none' }}
                 />
               )}
-
-
+              
             </div>  
             </div>
             {/* User Info */}
@@ -381,20 +381,20 @@ function CreateNewCardPersonal() {
                 <div class="grid gap-6 mb-6 md:grid-cols-3">
                     <div className='text-left'>
                         <label for="first_name" class="block mb-0.5 ml-0.5  text-sm font-medium text-gray-900">Name</label>
-                        <input value={card.name} onChange={e => setName(e.target.value)} type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-blue-500 block w-full p-2.5" required />
+                        <input placeholder={name} value={name} onChange={e => setName(e.target.value)} type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-blue-500 block w-full p-2.5" required />
                     </div>
                     <div className='text-left'>
                         <label for="location" class="block mb-0.5 ml-0.5 text-sm font-medium text-gray-900">Location</label>
-                        <input value={card.location} onChange={e => setLocation(e.target.value)} type="text" id="location" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required />
+                        <input value={location} onChange={e => setLocation(e.target.value)} type="text" id="location" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required />
                     </div>    
                     <div className='text-left'>
                         <label for="phone" class="block mb-0.5 ml-0.5 text-sm font-medium text-gray-900">Phone</label>
-                        <input value={card.phone} onChange={e => setPhone(e.target.value)} type="text" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required />
+                        <input value={phone} onChange={e => setPhone(e.target.value)} type="text" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required />
                     </div>  
                 </div>
                 <div class="mb-6 text-left">
                     <label for="Bio" class="block mb-0.5 ml-0.5 text-sm font-medium text-gray-900">Bio</label>
-                    <input value={card.bio} onChange={e => setBio(e.target.value)} type="text" id="Bio" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required />
+                    <input value={bio} onChange={e => setBio(e.target.value)} type="text" id="Bio" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required />
                 </div>
 
                 <div className='text-left '>
@@ -438,10 +438,10 @@ function CreateNewCardPersonal() {
           </div>
           <div className='px-2'>
           <div className='text-left px-1'>
-            <h2 className='text-xl mb-2 font-semibold'>{card.name || name || "Jared Dunn "}</h2>
+            <h2 className='text-xl mb-2 font-semibold'>{name || name || "Jared Dunn "}</h2>
             <div className='w-full text-sm text-gray-600'>
-              <p>{card.location || location || 'San Fancisco, CA'}</p>
-              <p>{card.bio || bio || 'Works @ Piped Piper'}</p>
+              <p>{location || location || 'San Fancisco, CA'}</p>
+              <p>{bio || bio || 'Works @ Piped Piper'}</p>
             </div>
           </div>
             <div className='w-full flex flex-wrap flex-row justify-start items-center mt-5 ml-3'>
