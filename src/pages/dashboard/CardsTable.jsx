@@ -25,7 +25,7 @@ useEffect(() => {
  
          if (error) {
             console.log('Could not fetch the offers')
-            // setOffers(null)
+            
           }
           
           if (data) {

@@ -5,10 +5,7 @@ import { Plus, Edit } from 'react-feather';
 import supabase from '../../config/supabaseClient'
 
 import LinkSearch from '../../components/dashboardComponents/LinksSearchPoUp'
-
-import Background from '../../assets/bgprofile.jpg';
-import GitHub from '../../assets/GitHubLogo.png';
-import Profile from '../../assets/profile.jpg';
+import GitHub from '../../assets/icons/GitHub.png'
 
 function CreateNewCardPersonal() {
   const navigate = useNavigate();

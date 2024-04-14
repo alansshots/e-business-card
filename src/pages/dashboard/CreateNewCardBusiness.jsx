@@ -1,15 +1,56 @@
 import React from 'react'
+
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Plus, Edit } from 'react-feather';
+import { Plus, Edit, Trash2, X} from 'react-feather';
 import supabase from '../../config/supabaseClient'
 
 import LinkSearch from '../../components/dashboardComponents/LinksSearchPoUp'
 
-import Background from '../../assets/bgprofile.jpg';
-import GitHub from '../../assets/GitHubLogo.png';
-import Profile from '../../assets/profile.jpg';
-import { data } from 'autoprefixer';
+import Behance from '../../assets/icons/Behance.png'
+import DeviantArt from '../../assets/icons/Deviantart.png'
+import Discord from '../../assets/icons/Discord.png'
+import Dribbble from '../../assets/icons/Dribbble.png'
+import Facebook from '../../assets/icons/Facebook.png'
+import GitHub from '../../assets/icons/GitHub.png'
+import Instagram from '../../assets/icons/Instagram.png'
+import Line from '../../assets/icons/Line.png'
+import LinkedIn from '../../assets/icons/Linkedin.png'
+import Pinterest from '../../assets/icons/Pinterest.png'
+import Reddit from '../../assets/icons/Reddit.png'
+import Signal from '../../assets/icons/Signal.png'
+import Snapchat from '../../assets/icons/Snapchat.png'
+import Telegram from '../../assets/icons/Telegram.png'
+import TikTok from '../../assets/icons/TikTok.png'
+import Tumblr from '../../assets/icons/Tumblr.png'
+import VK from '../../assets/icons/VK.png'
+import WeChat from '../../assets/icons/WeChat.png'
+import WhatsApp from '../../assets/icons/Whatsapp.png'
+import Youtube from '../../assets/icons/Youtube.png'
+
+
+const socialMediaIcons = {
+  Behance: Behance,
+  DeviantArt: DeviantArt,
+  Discord: Discord,
+  Dribbble: Dribbble,
+  Facebook: Facebook,
+  GitHub: GitHub,
+  Instagram: Instagram,
+  Line: Line,
+  LinkedIn: LinkedIn,
+  Pinterest: Pinterest,
+  Reddit: Reddit,
+  Signal: Signal,
+  Snapchat: Snapchat,
+  Telegram: Telegram,
+  TikTok: TikTok,
+  Tumblr: Tumblr,
+  VK: VK,
+  WeChat: WeChat,
+  WhatsApp: WhatsApp,
+  Youtube: Youtube
+};
 
 function CreateNewCardPersonal() {
   const navigate = useNavigate();
@@ -31,10 +72,13 @@ function CreateNewCardPersonal() {
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
   const [card, setCard] = useState('');
 
-
   // Function to toggle the visibility of the popup
   const togglePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
+  };
+
+  const handleRemoveLink = (indexToRemove) => {
+    setLinks(links.filter((_, index) => index !== indexToRemove));
   };
 
   useEffect(() => {
@@ -205,11 +249,21 @@ function CreateNewCardPersonal() {
           const cardData = data[0];
           setCard(cardData);
           console.log(cardData);
-    
+
+          setName(card.name)
+          setLocation(card.location)
+          setPhone(card.phone)
+          setBio(card.bio)
+          setSelectedProfileImage(card.profile_img_url)
+          setSelectedCoverImage(card.bg_img_url)
+
           // Parse the JSON string into an array
           const linksArray = JSON.parse(cardData.selected_links);
           setLinks(linksArray);
-          console.log(links);
+          // Access the 'name' property of each object in the 'links' array
+          linksArray.forEach(link => {
+            console.log(link.name);
+          });
         }
       } catch (error) {
         console.error('Error fetching user cards:', error.message);
@@ -226,17 +280,17 @@ function CreateNewCardPersonal() {
 
        fetchCard();
      }
-   }, [jwt, userId,]);  // Added userId as a dependency
+   }, [jwt, userId, name, location, bio, phone]);  // Added userId as a dependency
 
-  //   //  if (!title || salary === null || !industry || !location) {
-  //   //    console.error('Error: Title, salary, industry, and location cannot be null.');
-  //   //    // Handle the error state, for example, show an error message to the user
-  //   //    setErrorVisible(true);
-  //   //    setTimeout(() => {
-  //   //      setErrorVisible(false);
-  //   //    }, 5000);
-  //   //    return;
-  //   //  }
+    //  if (!title || salary === null || !industry || !location) {
+    //    console.error('Error: Title, salary, industry, and location cannot be null.');
+    //    // Handle the error state, for example, show an error message to the user
+    //    setErrorVisible(true);
+    //    setTimeout(() => {
+    //      setErrorVisible(false);
+    //    }, 5000);
+    //    return;
+    //  }
 
    async function submitCard() {
     const date = new Date().toLocaleDateString();
@@ -251,6 +305,7 @@ function CreateNewCardPersonal() {
             phone: phone,
             location: location,
             bio: bio,
+            selected_links: links,
             profile_img_url: selectedProfileImage,
             bg_img_url: selectedCoverImage,
           },
@@ -258,10 +313,11 @@ function CreateNewCardPersonal() {
         .eq('user_id', userId);
   
       if (error) {
-        throw new Error(`Error creating new card: ${error.message}`);
+        throw new Error(`Error updating card: ${error.message}`);
+
+      } else {
+        console.log('Card updated successfully:', data);
       }
-  
-      console.log('New card created successfully:', data);
   
       // Update state variables with new image URLs and other data
       setSelectedProfileImage(data[0].profile_img_url);
@@ -290,7 +346,7 @@ function CreateNewCardPersonal() {
                   onMouseLeave={() => setIsHoveredProfile(false)}
                 >
                   <img
-                    src={card.profile_img_url || selectedProfileImage || user.profile_image_url || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'}
+                    src={selectedProfileImage|| 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'}
                     alt="Profile"
                     style={{
                       // cursor: loggedInUser.id === user.id ? "pointer" : "default",
@@ -337,7 +393,7 @@ function CreateNewCardPersonal() {
                 onMouseLeave={() => setIsHoveredCover(false)}
                 class="flex flex-col items-center justify-center h-full w-full">
                   <img
-                    src={card.bg_img_url || selectedCoverImage || user.bg_img_url}
+                    src={selectedCoverImage || user.bg_img_url}
                     className='rounded-md'
                     style={{
                       // cursor: loggedInUser.id === user.id ? "pointer" : "default",
@@ -381,7 +437,7 @@ function CreateNewCardPersonal() {
                 <div class="grid gap-6 mb-6 md:grid-cols-3">
                     <div className='text-left'>
                         <label for="first_name" class="block mb-0.5 ml-0.5  text-sm font-medium text-gray-900">Name</label>
-                        <input placeholder={name} value={name} onChange={e => setName(e.target.value)} type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-blue-500 block w-full p-2.5" required />
+                        <input value={name} onChange={e => setName(e.target.value)} type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-blue-500 block w-full p-2.5" required />
                     </div>
                     <div className='text-left'>
                         <label for="location" class="block mb-0.5 ml-0.5 text-sm font-medium text-gray-900">Location</label>
@@ -405,10 +461,12 @@ function CreateNewCardPersonal() {
                     </a>
                     {
                       links.map((link, index) => (
-                        <div key={index} className='mr-8 mb-2 flex flex-col flex-center items-center'>
-                          <a href={link.url} className='h-20 w-20 p-3 hover:scale-95 duration-200 cursor-pointer bg-white rounded-xl border-2 border-gray-50 shadow-xl'>
-                            {link.name}
-                          </a>
+                        <div key={index} className='mr-8 mb-2 flex flex-col flex-center items-center relative'>
+                          <img src={socialMediaIcons[link.name]} className='h-20 w-20  bg-white rounded-xl border-2 border-gray-50 shadow-xl' />
+                          <p className='text-xs mt-1'>{link.name}</p>
+                          <button className="shadow-xl hover:scale-95 duration-200 cursor-pointer absolute top-0 right-0 mt-1 mr-1 p-1 text-red-600 rounded-full bg-white" onClick={() => handleRemoveLink(index)}>
+                            <X className='h-4 w-4'/>
+                          </button>
                         </div>
                       ))
                     }
@@ -438,10 +496,10 @@ function CreateNewCardPersonal() {
           </div>
           <div className='px-2'>
           <div className='text-left px-1'>
-            <h2 className='text-xl mb-2 font-semibold'>{name || name || "Jared Dunn "}</h2>
+            <h2 className='text-xl mb-2 font-semibold'>{ name || "Jared Dunn "}</h2>
             <div className='w-full text-sm text-gray-600'>
-              <p>{location || location || 'San Fancisco, CA'}</p>
-              <p>{bio || bio || 'Works @ Piped Piper'}</p>
+              <p>{location || 'San Fancisco, CA'}</p>
+              <p>{bio || 'Works @ Piped Piper'}</p>
             </div>
           </div>
             <div className='w-full flex flex-wrap flex-row justify-start items-center mt-5 ml-3'>
@@ -452,12 +510,11 @@ function CreateNewCardPersonal() {
                   ) : (
                     links.map((link, index) => (
                       <a key={index} className='mx-4 mb-2 flex flex-col flex-center items-center'>
-                      <img className='h-12 w-12  rounded-xl shadow-xl' src={GitHub} alt={link.name} />
+                      <img className='h-12 w-12  rounded-xl shadow-xl' src={socialMediaIcons[link.name]} alt={link.name} />
                       <p className='text-xs mt-1'>{link.name}</p>
                     </a>
                     ))
-                  )}
-              
+                  )}          
           </div>
           
           <div className='mb-5 flex flex-col items-center justify-center'>

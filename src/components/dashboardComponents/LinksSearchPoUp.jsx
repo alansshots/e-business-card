@@ -2,9 +2,29 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
-import {Search, ArrowLeft, X } from 'react-feather';
-import GitHub from '../../assets/GitHubLogo.png';
+import {Search, ArrowLeft, X, Twitter } from 'react-feather';
 import supabase from '../../config/supabaseClient';
+
+import Behance from '../../assets/icons/Behance.png'
+import DeviantArt from '../../assets/icons/Deviantart.png'
+import Discord from '../../assets/icons/Discord.png'
+import Dribbble from '../../assets/icons/Dribbble.png'
+import Facebook from '../../assets/icons/Facebook.png'
+import GitHub from '../../assets/icons/GitHub.png'
+import Instagram from '../../assets/icons/Instagram.png'
+import Line from '../../assets/icons/Line.png'
+import LinkedIn from '../../assets/icons/Linkedin.png'
+import Pinterest from '../../assets/icons/Pinterest.png'
+import Reddit from '../../assets/icons/Reddit.png'
+import Signal from '../../assets/icons/Signal.png'
+import Snapchat from '../../assets/icons/Snapchat.png'
+import Telegram from '../../assets/icons/Telegram.png'
+import TikTok from '../../assets/icons/TikTok.png'
+import Tumblr from '../../assets/icons/Tumblr.png'
+import VK from '../../assets/icons/VK.png'
+import WeChat from '../../assets/icons/WeChat.png'
+import WhatsApp from '../../assets/icons/Whatsapp.png'
+import Youtube from '../../assets/icons/Youtube.png'
 
 
 function LinksSearchPoUp({onClose}) {
@@ -121,23 +141,23 @@ const newLinksJSON = JSON.stringify(newLinks);
           <h2 className='text-md font-semibold text-[#013941]'>Contact</h2>
           <div className='w-full grid grid-cols-5 gap-3'>
               <div onClick={() => handleLinkClick('GitHub')} className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
-                <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
+                <img className='h-14 w-14 rounded-xl shadow-xl' src={GitHub} alt="" />
                 <p className='text-xs mt-1'>GitHub</p>
               </div> 
-              <div className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
-                <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
+              <div onClick={() => handleLinkClick('Instagram')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14 rounded-xl shadow-xl' src={Instagram} alt="" />
                 <p className='text-xs mt-1'>Instagram</p>
               </div>
-              <div className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
-                <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
+              <div onClick={() => handleLinkClick('Facebook')} className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14 rounded-xl shadow-xl' src={Facebook} alt="" />
                 <p className='text-xs mt-1'>Facebook</p>
               </div>
-              <div className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
-                <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
+              <div onClick={() => handleLinkClick('WhatsApp')} className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14 rounded-xl shadow-xl' src={WhatsApp} alt="" />
                 <p className='text-xs mt-1'>WatsApp</p>
               </div> 
-              <div className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
-                <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
+              <div onClick={() => handleLinkClick('WeChat')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14 rounded-xl shadow-xl' src={WeChat} alt="" />
                 <p className='text-xs mt-1'>WeChat</p>
               </div> 
                      
@@ -147,34 +167,74 @@ const newLinksJSON = JSON.stringify(newLinks);
         <div className='text-left w-full mt-4 mb-1'>
           <h2 className='text-md font-semibold text-[#013941]'>Social</h2>
           <div className='w-full grid grid-cols-5 gap-3'>
-            <div className='mx-4 mb-2 flex flex-col flex-center items-center'>
-              <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
-              <p className='text-xs mt-1'>Mail</p>
+             <div onClick={() => handleLinkClick('DeviantArt')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+              <img className='h-14 w-14  rounded-xl shadow-xl' src={DeviantArt} alt="" />
+              <p className='text-xs mt-1'>DeviantArt</p>
             </div> 
-            <div className='mx-4 mb-2 flex flex-col flex-center items-center'>
-                <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
-                <p className='text-xs mt-1'>GitHub</p>
+             <div onClick={() => handleLinkClick('Discord')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={Discord} alt="" />
+                <p className='text-xs mt-1'>Discord</p>
               </div>
-              <div className='mx-4 mb-2 flex flex-col flex-center items-center'>
-                <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
-                <p className='text-xs mt-1'>GitHub</p>
+               <div onClick={() => handleLinkClick('Instagram')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={Instagram} alt="" />
+                <p className='text-xs mt-1'>Instagram</p>
               </div> 
-              <div className='mx-4 mb-2 flex flex-col flex-center items-center'>
-                <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
-                <p className='text-xs mt-1'>GitHub</p>
+               <div onClick={() => handleLinkClick('Facebook')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={Facebook} alt="" />
+                <p className='text-xs mt-1'>Facebook</p>
               </div> 
-              <div className='mx-4 mb-2 flex flex-col flex-center items-center'>
-                <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
-                <p className='text-xs mt-1'>GitHub</p>
+               <div onClick={() => handleLinkClick('Dribbble')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={Dribbble} alt="" />
+                <p className='text-xs mt-1'>Dribbble</p>
               </div> 
-              <div className='mx-4 mb-2 flex flex-col flex-center items-center'>
-                <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
-                <p className='text-xs mt-1'>GitHub</p>
+               <div onClick={() => handleLinkClick('Pinterest')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={Pinterest} alt="" />
+                <p className='text-xs mt-1'>Pinterest</p>
               </div> 
-              <div className='mx-4 mb-2 flex flex-col flex-center items-center'>
-                <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
-                <p className='text-xs mt-1'>GitHub</p>
+               <div onClick={() => handleLinkClick('Reddit')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={Reddit} alt="" />
+                <p className='text-xs mt-1'>Reddit</p>
               </div>  
+               <div onClick={() => handleLinkClick('Line')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={Line} alt="" />
+                <p className='text-xs mt-1'>Line</p>
+              </div> 
+               <div onClick={() => handleLinkClick('Signal')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={Signal} alt="" />
+                <p className='text-xs mt-1'>Signal</p>
+              </div> 
+               <div onClick={() => handleLinkClick('Snapchat')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={Snapchat} alt="" />
+                <p className='text-xs mt-1'>Snapchat</p>
+              </div> 
+               <div onClick={() => handleLinkClick('Telegram')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={Telegram} alt="" />
+                <p className='text-xs mt-1'>Telegram</p>
+              </div> 
+               <div onClick={() => handleLinkClick('TikTok')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={TikTok} alt="" />
+                <p className='text-xs mt-1'>TikTok</p>
+              </div> 
+               <div onClick={() => handleLinkClick('Tumblr')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={Tumblr} alt="" />
+                <p className='text-xs mt-1'>Tumblr</p>
+              </div> 
+               <div onClick={() => handleLinkClick('Twitter')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={Twitter} alt="" />
+                <p className='text-xs mt-1'>Twitter</p>
+              </div> 
+               <div onClick={() => handleLinkClick('Youtube')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={Youtube} alt="" />
+                <p className='text-xs mt-1'>Youtube</p>
+              </div> 
+               <div onClick={() => handleLinkClick('VK')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={VK} alt="" />
+                <p className='text-xs mt-1'>VK</p>
+              </div>  
+              <div onClick={() => handleLinkClick('WhatsApp')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={WhatsApp} alt="" />
+                <p className='text-xs mt-1'>WhatsApp</p>
+              </div> 
 
           </div>
         </div>
@@ -182,27 +242,14 @@ const newLinksJSON = JSON.stringify(newLinks);
         <div className='text-left w-full mt-4 mb-1'>
           <h2 className='text-md font-semibold text-[#013941]'>Business</h2>
           <div className='w-full grid grid-cols-5 gap-3'>
-            <div className='mx-4 mb-2 flex flex-col flex-center items-center'>
-              <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
-              <p className='text-xs mt-1'>GitHub</p>
+             <div onClick={() => handleLinkClick('LinkedIn')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+              <img className='h-14 w-14  rounded-xl shadow-xl' src={LinkedIn} alt="" />
+              <p className='text-xs mt-1'>LinkedIn</p>
             </div> 
-            <div className='mx-4 mb-2 flex flex-col flex-center items-center'>
-              <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
-              <p className='text-xs mt-1'>GitHub</p>
+             <div onClick={() => handleLinkClick('Behance')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+              <img className='h-14 w-14  rounded-xl shadow-xl' src={Behance} alt="" />
+              <p className='text-xs mt-1'>Behance</p>
             </div> 
-            <div className='mx-4 mb-2 flex flex-col flex-center items-center'>
-              <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
-              <p className='text-xs mt-1'>GitHub</p>
-            </div> 
-            <div className='mx-4 mb-2 flex flex-col flex-center items-center'>
-              <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
-              <p className='text-xs mt-1'>GitHub</p>
-            </div> 
-            <div className='mx-4 mb-2 flex flex-col flex-center items-center'>
-              <img className='h-14 w-14  rounded-xl shadow-xl' src={GitHub} alt="" />
-              <p className='text-xs mt-1'>GitHub</p>
-            </div>   
-              
           </div>
         </div>
 
@@ -217,7 +264,7 @@ const newLinksJSON = JSON.stringify(newLinks);
             <form className="text-left" onSubmit={handleAddLink}  >
               <div className="mb-4">
                 <label htmlFor="linkName" className="block mb-1 text-sm font-medium text-gray-700">Link Name:</label>
-                <input type="text" id="linkName" value={linkName} onChange={(e) => setLinkName(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
+                <input  readOnly type="text" id="linkName" value={linkName} onChange={(e) => setLinkName(e.target.value)} className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" />
               </div>
               <div className="mb-4">
                 <label htmlFor="linkUrl" className="block mb-1 text-sm font-medium text-gray-700">Link URL:</label>
