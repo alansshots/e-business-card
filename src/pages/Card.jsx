@@ -23,7 +23,7 @@ import VK from '../assets/icons/VK.png'
 import WeChat from '../assets/icons/WeChat.png'
 import WhatsApp from '../assets/icons/Whatsapp.png'
 import Youtube from '../assets/icons/Youtube.png'
-
+import Gmail from '../assets/icons/Gmail.png'
 
 const socialMediaIcons = {
   Behance: Behance,
@@ -45,7 +45,8 @@ const socialMediaIcons = {
   VK: VK,
   WeChat: WeChat,
   WhatsApp: WhatsApp,
-  Youtube: Youtube
+  Youtube: Youtube,
+  Gmail:Gmail
 };
 
 
@@ -146,7 +147,7 @@ function Card() {
           </div>
           
           <div className='mb-10 flex flex-col items-center justify-center'>
-            <div onClick={() => handleAddContact(card.phone, card.name)} className='mt-10 w-4/5 text-center bg-[#013941] py-3 px-5 mx-2 text-2xl font-semibold text-white shadow-xl rounded-full'>Add Contact</div>
+            <div onClick={() => handleAddContact(card.phone, card.name)} className='cursor-pointer mt-10 w-4/5 text-center bg-[#013941] py-3 px-5 mx-2 text-2xl font-semibold text-white shadow-xl rounded-full'>Add Contact</div>
             <Link to='/sign-up' className='mt-10  w-1/2 text-center bg-white text-black mx-2 shadow-xl border-2 border-black text-sm rounded-full'>Create your own E-card</Link>
           </div>
           

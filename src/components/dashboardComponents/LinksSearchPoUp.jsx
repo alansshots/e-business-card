@@ -25,6 +25,7 @@ import VK from '../../assets/icons/VK.png'
 import WeChat from '../../assets/icons/WeChat.png'
 import WhatsApp from '../../assets/icons/Whatsapp.png'
 import Youtube from '../../assets/icons/Youtube.png'
+import Gmail from '../../assets/icons/Gmail.png'
 
 
 function LinksSearchPoUp({onClose, updateLinks}) {
@@ -146,6 +147,10 @@ const newLinksJSON = JSON.stringify(newLinks);
               <div onClick={() => handleLinkClick('GitHub')} className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
                 <img className='h-14 w-14 rounded-xl shadow-xl' src={GitHub} alt="" />
                 <p className='text-xs mt-1'>GitHub</p>
+              </div> 
+              <div onClick={() => handleLinkClick('Gmail')} className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14 rounded-xl shadow-xl' src={Gmail} alt="" />
+                <p className='text-xs mt-1'>Gmail</p>
               </div> 
               <div onClick={() => handleLinkClick('Instagram')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
                 <img className='h-14 w-14 rounded-xl shadow-xl' src={Instagram} alt="" />

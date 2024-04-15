@@ -28,6 +28,7 @@ import VK from '../../assets/icons/VK.png'
 import WeChat from '../../assets/icons/WeChat.png'
 import WhatsApp from '../../assets/icons/Whatsapp.png'
 import Youtube from '../../assets/icons/Youtube.png'
+import Gmail from '../../assets/icons/Gmail.png'
 
 
 const socialMediaIcons = {
@@ -50,7 +51,8 @@ const socialMediaIcons = {
   VK: VK,
   WeChat: WeChat,
   WhatsApp: WhatsApp,
-  Youtube: Youtube
+  Youtube: Youtube,
+  Gmail:Gmail
 };
 
 function CreateNewCardPersonal() {
@@ -82,111 +84,89 @@ function CreateNewCardPersonal() {
   const toggleQRPopUp = () => {
     setIsQRPopUpOpen(!isQRPopUpOpen);
   };
-
-  const handleRemoveLink = (indexToRemove) => {
-    setLinks(prevLinks => prevLinks.filter((_, index) => index !== indexToRemove));
-  };
-
-  const updateLinks = (newLinks) => {
-    setLinks(newLinks);
-  }
-
+  
   useEffect(() => {
-    async function getLoggedInUser() {
-      if (jwt) {
-        const { data, error } = await supabase.auth.getUser(jwt);
-        if (data?.user) {
-          setLoggedInUser(data.user);
-          console.log(data.user);
-        }
-      }
-    }
-    async function getUserCard() {
+    async function fetchData() {
       try {
-        let { data, error } = await supabase
-          .from('cards')
-          .select()
-          .eq('user_id', userId);
-    
-        if (error) {
-          throw error;
-        }
-    
-        if (data) {
-          setCard(data);
-          console.log(data);
-        }
-      } catch (error) {
-        console.error('Error fetching user cards:', error.message);
-        // Handle the error here, such as displaying an error message to the user
-      }
-    }
-
-    
-    if (jwt && !loggedInUser) {
-      getLoggedInUser();
-
-      getUserCard(); 
-    }
-    
-  }, [jwt]);
-  
-
-  // Profile Imgage Change 
-  const handleProfileImageChange = async (event) => {
-    const image = event.target.files[0];
-    setSelectedProfileImage(image);
-    
-    if (image) {
-      try {
-        // Upload the image to Supabase Storage
-        const { data: uploadData, error: uploadError } = await supabase.storage
-          .from('profile_images')
-          .upload(`${loggedInUser.id}/${image.name}`, image);
-  
-        if (uploadError) {
-          throw new Error(`Error uploading image: ${uploadError.message}`);
-        }
-  
-        // Log the structure of the uploadData object
-        // console.log('Upload Data:', uploadData);
-  
-        // Get the URL of the uploaded image
-        const imageUrl = await supabase.storage
-          .from('profile_images')
-          .getPublicUrl(`${loggedInUser.id}/${image.name}`);
-  
-        if (!imageUrl) {
-          throw new Error('Image URL is null or undefined');
+        if (jwt && !loggedInUser) {
+          const { data: userData, error: userError } = await supabase.auth.getUser(jwt);
+          if (userData?.user) {
+            setLoggedInUser(userData.user);
+            setUserId(userData.user.id);
+          }
         }
         
-        // Update the user's record in the database with the new image URL
-        const { data: updateData, error: updateError } = await supabase
-          .from('cards')
-          .update({ profile_img_url: imageUrl.data.publicUrl })
-          .eq('user_id', loggedInUser.id);
-  
-        if (updateError) {
-          throw new Error(`Error updating user record: ${updateError.message}`);
-        }
+        if (jwt && userId) {
+          const { data: cardData, error: cardError } = await supabase
+            .from('cards')
+            .select()
+            .eq('user_id', userId);
 
-        setSelectedProfileImage(imageUrl.data.publicUrl);
+          if (cardData && cardData.length > 0) {
+            const cardInfo = cardData[0];
+            setCard(cardInfo);
+            setName(cardInfo.name || '');
+            setLocation(cardInfo.location || '');
+            setPhone(cardInfo.phone || '');
+            setBio(cardInfo.bio || '');
+            setSelectedProfileImage(cardInfo.profile_img_url || '');
+            setSelectedCoverImage(cardInfo.bg_img_url || '');
+
+            const linksArray = JSON.parse(cardInfo.selected_links || '[]');
+            setLinks(linksArray);
+          }
+        }
       } catch (error) {
-        console.error(error.message);
+        console.error('Error fetching data:', error.message);
       }
+    }
+
+    fetchData();
+  }, [jwt, userId]);
+
+  const submitCard = async () => {
+    const date = new Date().toLocaleDateString();
+    try {
+      const { data, error } = await supabase
+        .from('cards')
+        .update([
+          {
+            user_id: userId,
+            name,
+            created_at: date,
+            phone,
+            location,
+            bio,
+            selected_links: links,
+            profile_img_url: selectedProfileImage,
+            bg_img_url: selectedCoverImage,
+          },
+        ])
+        .eq('user_id', userId);
+
+      if (error) {
+        throw new Error(`Error updating card: ${error.message}`);
+      } else {
+        console.log('Card updated successfully:', data);
+        setSelectedProfileImage(data[0].profile_img_url);
+        setSelectedCoverImage(data[0].bg_img_url);
+        setCard(data[0]);
+      }
+    } catch (error) {
+      console.error('Error updating card:', error.message);
     }
   };
 
     // Profile Imgage Change 
-    const handleCoverImageChange = async (event) => {
+    const handleProfileImageChange = async (event) => {
       const image = event.target.files[0];
-      setSelectedCoverImage(image);
+      setSelectedProfileImage(image);
       
       if (image) {
         try {
           // Upload the image to Supabase Storage
           const { data: uploadData, error: uploadError } = await supabase.storage
-            .from('cover_images')
+            .from('profile_images')
             .upload(`${loggedInUser.id}/${image.name}`, image);
     
           if (uploadError) {
@@ -198,7 +178,7 @@ function CreateNewCardPersonal() {
     
           // Get the URL of the uploaded image
           const imageUrl = await supabase.storage
-            .from('cover_images')
+            .from('profile_images')
             .getPublicUrl(`${loggedInUser.id}/${image.name}`);
     
           if (!imageUrl) {
@@ -208,138 +188,74 @@ function CreateNewCardPersonal() {
           // Update the user's record in the database with the new image URL
           const { data: updateData, error: updateError } = await supabase
             .from('cards')
-            .update({bg_img_url: imageUrl.data.publicUrl })
+            .update({ profile_img_url: imageUrl.data.publicUrl })
             .eq('user_id', loggedInUser.id);
     
           if (updateError) {
             throw new Error(`Error updating user record: ${updateError.message}`);
           }
   
-          setSelectedCoverImage(imageUrl.data.publicUrl);
+          setSelectedProfileImage(imageUrl.data.publicUrl);
         } catch (error) {
           console.error(error.message);
         }
       }
     };
- 
-   useEffect(() => {
-     async function getUserData() {
-       const { data, error } = await supabase.auth.getUser(jwt);
-       if (data?.user) {
-         setUserId(data.user.id);
-       }
-     }
-   
-     const fetchUser = async () => {
-       // Wait for userId to be set
-       if (userId) {
-         const { data: user, error } = await supabase
-           .from('users')
-           .select()
-           .eq('id', userId);
-   
-         if (user) {
-           setUser(user[0]);
-         }
-       }
-     };
-
-     const fetchCard = async () => {
-      try {
-        let { data, error } = await supabase
-          .from('cards')
-          .select()
-          .eq('user_id', userId);
+  
+    // Cover Imgage Change 
+    const handleCoverImageChange = async (event) => {
+      const image = event.target.files[0];
+        setSelectedCoverImage(image);
+        
+        if (image) {
+          try {
+            // Upload the image to Supabase Storage
+            const { data: uploadData, error: uploadError } = await supabase.storage
+              .from('cover_images')
+              .upload(`${loggedInUser.id}/${image.name}`, image);
+      
+            if (uploadError) {
+              throw new Error(`Error uploading image: ${uploadError.message}`);
+            }
+      
+            // Log the structure of the uploadData object
+            // console.log('Upload Data:', uploadData);
+      
+            // Get the URL of the uploaded image
+            const imageUrl = await supabase.storage
+              .from('cover_images')
+              .getPublicUrl(`${loggedInUser.id}/${image.name}`);
+      
+            if (!imageUrl) {
+              throw new Error('Image URL is null or undefined');
+            }
+            
+            // Update the user's record in the database with the new image URL
+            const { data: updateData, error: updateError } = await supabase
+              .from('cards')
+              .update({bg_img_url: imageUrl.data.publicUrl })
+              .eq('user_id', loggedInUser.id);
+      
+            if (updateError) {
+              throw new Error(`Error updating user record: ${updateError.message}`);
+            }
     
-        if (error) {
-          throw error;
+            setSelectedCoverImage(imageUrl.data.publicUrl);
+          } catch (error) {
+            console.error(error.message);
+          }
         }
-    
-        if (data && data.length > 0) {
-          const cardData = data[0];
-          setCard(cardData);
-          console.log(cardData);
-
-          setName(card.name)
-          setLocation(card.location)
-          setPhone(card.phone)
-          setBio(card.bio)
-          setSelectedProfileImage(card.profile_img_url)
-          setSelectedCoverImage(card.bg_img_url)
-
-          // Parse the JSON string into an array
-          const linksArray = JSON.parse(cardData.selected_links);
-          setLinks(linksArray);
-          // Access the 'name' property of each object in the 'links' array
-          linksArray.forEach(link => {
-            console.log(link.name);
-          });
-        }
-      } catch (error) {
-        console.error('Error fetching user cards:', error.message);
-        // Handle the error here, such as displaying an error message to the user
-      }
     };
 
-     if (jwt) {
-       // First, get user data from auth
-       getUserData();
-       
-       // Then, fetch user data from the database
-       fetchUser();
+  const handleRemoveLink = (indexToRemove) => {
+    setLinks(prevLinks => prevLinks.filter((_, index) => index !== indexToRemove));
+  };
 
-       fetchCard();
-     }
-   }, [jwt, userId, name, location, bio, phone]);  // Added userId as a dependency
-
-    //  if (!title || salary === null || !industry || !location) {
-    //    console.error('Error: Title, salary, industry, and location cannot be null.');
-    //    // Handle the error state, for example, show an error message to the user
-    //    setErrorVisible(true);
-    //    setTimeout(() => {
-    //      setErrorVisible(false);
-    //    }, 5000);
-    //    return;
-    //  }
-
-   async function submitCard() {
-    const date = new Date().toLocaleDateString();
-    try {
-      const { data, error } = await supabase
-        .from('cards')
-        .update([
-          {  
-            user_id: userId,
-            name: name,
-            created_at: date,
-            phone: phone,
-            location: location,
-            bio: bio,
-            selected_links: links,
-            profile_img_url: selectedProfileImage,
-            bg_img_url: selectedCoverImage,
-          },
-        ])
-        .eq('user_id', userId);
-  
-      if (error) {
-        throw new Error(`Error updating card: ${error.message}`);
-
-      } else {
-        console.log('Card updated successfully:', data);
-      }
-  
-      // Update state variables with new image URLs and other data
-      setSelectedProfileImage(data[0].profile_img_url);
-      setSelectedCoverImage(data[0].bg_img_url);
-      setCard(data[0]);
-  
-    } catch (error) {
-      console.error('Error creating new card:', error);
-      // Handle error state
-    }
+  const updateLinks = (newLinks) => {
+    setLinks(newLinks);
   }
 
+  
   return (
     <div className='flex flex-col items-center justify-center'>
         <div className='mt-2 flex flex-row items-center justify-around w-full'>
@@ -356,7 +272,7 @@ function CreateNewCardPersonal() {
                   onMouseLeave={() => setIsHoveredProfile(false)}
                 >
                   <img
-                    src={selectedProfileImage|| 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'}
+                    src={selectedProfileImage || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'}
                     alt="Profile"
                     style={{
                       // cursor: loggedInUser.id === user.id ? "pointer" : "default",
@@ -383,7 +299,6 @@ function CreateNewCardPersonal() {
                   ) : null}
                 </div>
               </label>
-              { loggedInUser.id === user.id && (
                 <input
                   id="profile-img-upload"
                   type="file"
@@ -391,7 +306,6 @@ function CreateNewCardPersonal() {
                   onChange={handleProfileImageChange}
                   style={{ display: 'none' }}
                 />
-              )}
             </div> 
 
             <div class="flex flex-col items-center justify-center w-3/5">
@@ -430,7 +344,6 @@ function CreateNewCardPersonal() {
                   ) : null}
                 </div>
               </label>
-              { loggedInUser.id === user.id && (
                 <input
                   id="cover-img-upload"
                   type="file"
@@ -438,8 +351,6 @@ function CreateNewCardPersonal() {
                   onChange={handleCoverImageChange}
                   style={{ display: 'none' }}
                 />
-              )}
-              
             </div>  
             </div>
             {/* User Info */}
@@ -498,10 +409,10 @@ function CreateNewCardPersonal() {
           <div className='w-full'>
             <div className='relative'>
               <div  style={{ clipPath: 'ellipse(85% 67% at 78% 22%)'}} className='bg-[#013941] h-48 sm:rounded-3xl flex items-center justify-center relative overflow-hidden'>
-                <div className='absolute bg-cover bg-cenwter w-full h-full' style={{ backgroundImage: `url(${ card.bg_img_url || selectedCoverImage || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'})` }}></div>
+                <div className='absolute bg-cover bg-cenwter w-full h-full' style={{ backgroundImage: `url(${ selectedCoverImage || card.bg_img_url || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'})` }}></div>
               </div>
             <div className='absolute left-0 bottom-0'>    
-                <img className='h-20 w-20 ml-2 mb-5 border-4 border-white rounded-full' src={card.profile_img_url || selectedProfileImage || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'} alt="" />     
+                <img className='h-20 w-20 ml-2 mb-5 border-4 border-white rounded-full' src={selectedProfileImage || card.profile_img_url || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'} alt="" />     
             </div>
           </div>
           <div className='px-2'>
