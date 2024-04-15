@@ -6,6 +6,7 @@ import { Plus, Edit, Trash2, X} from 'react-feather';
 import supabase from '../../config/supabaseClient'
 
 import LinkSearch from '../../components/dashboardComponents/LinksSearchPoUp'
+import CardQRPopUp from '../../components/dashboardComponents/CardQRPopUp'
 
 import Behance from '../../assets/icons/Behance.png'
 import DeviantArt from '../../assets/icons/Deviantart.png'
@@ -53,8 +54,8 @@ const socialMediaIcons = {
 };
 
 function CreateNewCardPersonal() {
-  const navigate = useNavigate();
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [isQRPopUpOpen, setIsQRPopUpOpen] = useState(false);
   const [isHoveredProfile, setIsHoveredProfile] = useState(false);
   const [isHoveredCover, setIsHoveredCover] = useState(false);
   
@@ -72,14 +73,23 @@ function CreateNewCardPersonal() {
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
   const [card, setCard] = useState('');
 
+
   // Function to toggle the visibility of the popup
   const togglePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
   };
 
-  const handleRemoveLink = (indexToRemove) => {
-    setLinks(links.filter((_, index) => index !== indexToRemove));
+  const toggleQRPopUp = () => {
+    setIsQRPopUpOpen(!isQRPopUpOpen);
   };
+
+  const handleRemoveLink = (indexToRemove) => {
+    setLinks(prevLinks => prevLinks.filter((_, index) => index !== indexToRemove));
+  };
+
+  const updateLinks = (newLinks) => {
+    setLinks(newLinks);
+  }
 
   useEffect(() => {
     async function getLoggedInUser() {
@@ -433,7 +443,7 @@ function CreateNewCardPersonal() {
             </div>  
             </div>
             {/* User Info */}
-            <form className='mt-10'>
+            <div className='mt-10'>
                 <div class="grid gap-6 mb-6 md:grid-cols-3">
                     <div className='text-left'>
                         <label for="first_name" class="block mb-0.5 ml-0.5  text-sm font-medium text-gray-900">Name</label>
@@ -474,12 +484,12 @@ function CreateNewCardPersonal() {
                 </div>
 
                 <div className='text-left'>
-                  <button onClick={submitCard} type='button' className="mt-5 my-5 py-2 w-1/4 shadow-md bg-[#14B8A6] text-white text-xl rounded-full focus:outline-none focus:ring ">
+                  <button onClick={() => { submitCard(); toggleQRPopUp(); }} type="button" className="mt-5 my-5 py-2 w-1/4 shadow-md bg-[#14B8A6] text-white text-xl rounded-full focus:outline-none">
                     Save
                   </button>
                 </div>
 
-            </form>
+            </div>
     
           </div>
         {/* Preview */}
@@ -502,19 +512,20 @@ function CreateNewCardPersonal() {
               <p>{bio || 'Works @ Piped Piper'}</p>
             </div>
           </div>
-            <div className='w-full flex flex-wrap flex-row justify-start items-center mt-5 ml-3'>
-              {!links || links.length === 0 ? (
-                    <a onClick={togglePopUp} className='mr-8 mb-2 flex flex-col flex-center items-center'>
-                      <Plus className='h-20 w-20 p-3 hover:scale-95 duration-200 cursor-pointer bg-white rounded-xl border-2 border-gray-50 shadow-xl'/>
-                    </a>
-                  ) : (
-                    links.map((link, index) => (
-                      <a key={index} className='mx-4 mb-2 flex flex-col flex-center items-center'>
-                      <img className='h-12 w-12  rounded-xl shadow-xl' src={socialMediaIcons[link.name]} alt={link.name} />
-                      <p className='text-xs mt-1'>{link.name}</p>
-                    </a>
-                    ))
-                  )}          
+
+          <div className='w-full grid grid-cols-3 justify-center items-center gap-3 mt-5'>
+          {!links || links.length === 0 ? (
+            <a onClick={togglePopUp} className='flex flex-col flex-center items-center'>
+              <Plus className='h-20 w-20 p-3 hover:scale-95 duration-200 cursor-pointer bg-white rounded-xl border-2 border-gray-50 shadow-xl'/>
+            </a>
+          ) : (
+            links.map((link, index) => (
+              <a key={index} className='flex flex-col flex-center items-center'>
+                <img className='h-12 w-12 rounded-xl shadow-xl' src={socialMediaIcons[link.name]} alt={link.name} />
+                <p className='text-xs mt-1'>{link.name}</p>
+              </a>
+            ))
+          )}    
           </div>
           
           <div className='mb-5 flex flex-col items-center justify-center'>
@@ -527,7 +538,8 @@ function CreateNewCardPersonal() {
         </div>
         </div>
         
-        {isPopUpOpen && <LinkSearch onClose={togglePopUp} />}
+        {isPopUpOpen && <LinkSearch onClose={togglePopUp} updateLinks={updateLinks}  />}
+        {isQRPopUpOpen && <CardQRPopUp onCloseQR={toggleQRPopUp} cardId={card.card_id}/>}
     </div>
   )
 }

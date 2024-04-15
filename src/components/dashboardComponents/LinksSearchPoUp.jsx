@@ -27,7 +27,7 @@ import WhatsApp from '../../assets/icons/Whatsapp.png'
 import Youtube from '../../assets/icons/Youtube.png'
 
 
-function LinksSearchPoUp({onClose}) {
+function LinksSearchPoUp({onClose, updateLinks}) {
   const [links, setLinks] = useState([]);
   const [showAddLinkPopup, setShowAddLinkPopup] = useState(false);
   const [linkName, setLinkName] = useState('');
@@ -113,6 +113,9 @@ const newLinksJSON = JSON.stringify(newLinks);
     setLinkName('');
     setLinkUrl('');
     
+    // Update Links
+    updateLinks(newLinks);
+
     // Close the popup
     onClose();
   };
