@@ -12,16 +12,16 @@ function QRCodePopup({ onCloseQR, cardId }) {
       <h2 className="text-xl font-bold">Your card is ready to be used.</h2>
         <p className="text-sm mt-2 mb-5">Share it via Link or QR code, or order accessories for it.</p>      
         <QRCode 
-          value={`http://192.168.56.1:5173/card/${cardId}`} 
+          value={`https://kartaa.netlify.app/card/${cardId}`} 
           logoImage={Logo}
           removeQrCodeBehindLogo={true} 
           eyeRadius={5} 
           logoPaddingStyle='circle'
           qrStyle='dots'
         />
-        {/* <a target='_blank' href={`https://kartaa.netlify.app/card/${cardId}`}
+        <a target='_blank' href={`https://kartaa.netlify.app/card/${cardId}`}
            className='text-xs mt-1 '
-        >{`http://10.50.11.90:5173/card/${cardId}`}</a> */}
+        >{`/card/${cardId}`}</a>
         <div className="flex justify-center mt-4">
             <button type="button" className="mt-5 mx-1 my-5 px-4 py-1 shadow-md bg-[#14B8A6] text-white text-md rounded-full focus:outline-none">
                 Share
