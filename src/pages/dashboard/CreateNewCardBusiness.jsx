@@ -132,6 +132,7 @@ function CreateNewCardPersonal() {
         .update([
           {
             user_id: userId,
+            email: loggedInUser.email,
             name,
             created_at: date,
             phone,

@@ -150,7 +150,7 @@ const newLinksJSON = JSON.stringify(newLinks);
               </div> 
               <div onClick={() => handleLinkClick('Gmail')} className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
                 <img className='h-14 w-14 rounded-xl shadow-xl' src={Gmail} alt="" />
-                <p className='text-xs mt-1'>Gmail</p>
+                <p className='text-xs mt-1'>Email</p>
               </div> 
               <div onClick={() => handleLinkClick('Instagram')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
                 <img className='h-14 w-14 rounded-xl shadow-xl' src={Instagram} alt="" />

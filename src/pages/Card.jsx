@@ -85,31 +85,26 @@ function Card() {
     fetchCard();
   }, []);  
  
-  const handleAddContact = (phoneNumber, fullName) => {
-    // Check if the browser supports the Contacts API
-    if ('contacts' in navigator && 'ContactsManager' in window) {
-      // Define contact properties
-      const contact = {
-        name: [{ givenName: fullName}], // Example name
-        phoneNumbers: [{ value: phoneNumber }], // Use the provided phone number
-      };
+  const handleAddContact = () => {
+    const contact = {
+      name: card.name,
+      phone: card.phone,
+      email: card.email
+    };
 
-      // Add the contact to the user's address book
-      navigator.contacts.select().then(contacts => {
-        contacts.openNew(contact).then(newContact => {
-          console.log('Contact added successfully:', newContact);
-          // You can provide feedback to the user here if needed
-        }).catch(error => {
-          console.error('Error adding contact:', error);
-          // Handle errors if necessary
-        });
-      });
-    } else {
-      // Contacts API is not supported
-      console.error('Contacts API is not supported in this browser.');
-      // Provide a fallback option or message to the user
-    }
+    console.log(contact.name, contact.phone, contact.email)
+
+    const vcard = `BEGIN:VCARD\nVERSION:3.0\nFN:${contact.name}\nTEL;TYPE=cell:${contact.phone}\nEMAIL:${contact.email}\nEND:VCARD`;
+    const blob = new Blob([vcard], { type: "text/vcard" });
+    const url = URL.createObjectURL(blob);
+
+    const newLink = document.createElement('a');
+    newLink.download = contact.name + ".vcf";
+    newLink.href = url;
+
+    newLink.click();
   };
+
 
   return (
     <>
@@ -147,7 +142,7 @@ function Card() {
           </div>
           
           <div className='mb-10 flex flex-col items-center justify-center'>
-            <div onClick={() => handleAddContact(card.phone, card.name)} className='cursor-pointer mt-10 w-4/5 text-center bg-[#013941] py-3 px-5 mx-2 text-2xl font-semibold text-white shadow-xl rounded-full'>Add Contact</div>
+            <div onClick={() => handleAddContact()} className='cursor-pointer mt-10 w-4/5 text-center bg-[#013941] py-3 px-5 mx-2 text-2xl font-semibold text-white shadow-xl rounded-full'>Add Contact</div>
             <Link to='/sign-up' className='mt-10  w-1/2 text-center bg-white text-black mx-2 shadow-xl border-2 border-black text-sm rounded-full'>Create your own E-card</Link>
           </div>
           
