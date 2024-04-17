@@ -254,7 +254,6 @@ function CreateNewCardPersonal() {
   const updateLinks = (newLinks) => {
     setLinks(newLinks);
   }
-
   
   return (
     <div className='flex flex-col items-center justify-center'>
