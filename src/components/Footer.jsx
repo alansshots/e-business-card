@@ -1,14 +1,17 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
+import Logo from '../assets/logo.png'
 
 function Footer() {
   return (
         <footer class="text-gray-600 mt-10 body-font border-t border-gray-300 shadow-xl">
             <div class="mx-10 px-5 py-16 mx-auto flex  md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
                 <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
-                <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-                    <div>LOGO</div>
+                <Link to='/'  class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+                    <img src={Logo} alt="logo" className='w-10 h-10'/>
                     <span class="ml-3 text-xl">Company Name</span>
-                </a>
+                </Link>
                 <p class="mt-2 text-sm text-gray-500">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
                 </div>
                 <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">

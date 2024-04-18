@@ -65,7 +65,7 @@ function DashNav() {
           </button>
           <div class="text-xl font-bold flex items-center lg:ml-2.5">
             <img src={Logo} class="h-6 mr-2" alt="Windster Logo"/>
-            <span class="self-center whitespace-nowrap">Company Name</span>
+            <span class="self-center whitespace-nowrap">Colorblock</span>
           </div>
          </div>
          <div class="relative flex-1 flex flex-col min-h-0 shadow-xl bg-white pt-0 border-t-2 border-[#013941]">

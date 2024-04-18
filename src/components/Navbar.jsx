@@ -1,11 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import Logo from '../assets/logo.png'
+
 function Navbar() {
   return (
     <div id='Navbar' className='flex flex-row justify-between items-center border-b border-gray-300 shadow-md px-10 py-4'>
         <div>
-            <Link to='/' className='cursor-pointer'>LOGO</Link>
+            <Link to='/' className='cursor-pointer'>
+                <img src={Logo} alt="logo" className='w-10 h-10'/>
+            </Link>
         </div>
         <div className='flex flex-row justify-between items-center'>
             {/* <div className='flex flex-row items-center justify-between'>
@@ -14,8 +18,8 @@ function Navbar() {
                 <a className='cursor-pointer p-2 mx-2 font-normal'>Parents</a>
             </div> */}
             <div className='flex flex-row items-center justify-center'>
-                <Link to='/sign-in' className='cursor-pointer text-center bg-[#14B8A6] py-1 px-5 mx-2 text-xl font-normal text-white rounded-full'>Sign In</Link>
-                <Link to='/sign-up' className='cursor-pointer text-center bg-[#013941] py-1 px-5 mx-2 text-xl font-normal text-white rounded-full'>Sign Up</Link>
+                <Link to='/sign-in' className='cursor-pointer hover:scale-95 duration-200 text-center bg-[#14B8A6] py-1 px-5 mx-2 text-xl font-normal text-white rounded-full'>Sign In</Link>
+                <Link to='/sign-up' className='cursor-pointer hover:scale-95 duration-200 text-center bg-[#013941] py-1 px-5 mx-2 text-xl font-normal text-white rounded-full'>Sign Up</Link>
             </div>
         </div>
     </div>
