@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 
 import Banner from '../components/Banner'
 import HomeExplanantion from '../components/HomeExplanantion'
+import Pricing from '../components/Pricing'
 import HomeSteps from '../components/HomeSteps'
 
 function Home() {
@@ -14,6 +15,7 @@ function Home() {
     <Navbar/>
         <Banner/>
         <HomeExplanantion/>
+        <Pricing/>
         <HomeSteps/>
     <Footer/>
     </>
