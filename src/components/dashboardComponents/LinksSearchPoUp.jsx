@@ -142,7 +142,7 @@ const newLinksJSON = JSON.stringify(newLinks);
         <div className='mt-10 text-left'>
         {/* Contact */}
         <div className='text-left w-full mb-1'>
-          <h2 className='text-md font-semibold text-[#013941]'>Contact</h2>
+          <h2 className='text-md font-semibold text-[#013941]'>Recommended</h2>
           <div className='w-full grid grid-cols-5 gap-3'>
               <div onClick={() => handleLinkClick('GitHub')} className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
                 <img className='h-14 w-14 rounded-xl shadow-xl' src={GitHub} alt="" />
@@ -243,7 +243,10 @@ const newLinksJSON = JSON.stringify(newLinks);
                 <img className='h-14 w-14  rounded-xl shadow-xl' src={WhatsApp} alt="" />
                 <p className='text-xs mt-1'>WhatsApp</p>
               </div> 
-
+              <div onClick={() => handleLinkClick('Behance')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={Behance} alt="" />
+                <p className='text-xs mt-1'>Behance</p>
+              </div> 
           </div>
         </div>
         {/* Business */}
@@ -253,10 +256,6 @@ const newLinksJSON = JSON.stringify(newLinks);
              <div onClick={() => handleLinkClick('LinkedIn')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
               <img className='h-14 w-14  rounded-xl shadow-xl' src={LinkedIn} alt="" />
               <p className='text-xs mt-1'>LinkedIn</p>
-            </div> 
-             <div onClick={() => handleLinkClick('Behance')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
-              <img className='h-14 w-14  rounded-xl shadow-xl' src={Behance} alt="" />
-              <p className='text-xs mt-1'>Behance</p>
             </div> 
           </div>
         </div>

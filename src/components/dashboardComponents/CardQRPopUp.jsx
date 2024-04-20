@@ -21,13 +21,13 @@ function QRCodePopup({ onCloseQR, cardId }) {
         />
         <a target='_blank' href={`https://kartaa.netlify.app/card/${cardId}`}
            className='text-xs mt-1 '
-        >{`/card/${cardId}`}</a>
+        >{`https://kartaa.netlify.app/card/${cardId}`}</a>
         <div className="flex justify-center mt-4">
             <button type="button" className="mt-5 mx-1 my-5 px-4 py-1 shadow-md bg-[#14B8A6] text-white text-md rounded-full focus:outline-none">
                 Share
             </button>
           <button  className="mt-5 mx-1 my-5 px-4 py-1 shadow-md bg-[#013941] text-white text-md rounded-full focus:outline-none">
-            Accessories
+            Accessories 
           </button>
         </div>
       </div>
