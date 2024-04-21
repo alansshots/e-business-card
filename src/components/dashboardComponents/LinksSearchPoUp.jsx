@@ -34,7 +34,6 @@ function LinksSearchPoUp({onClose, updateLinks}) {
   const [linkName, setLinkName] = useState('');
   const [linkUrl, setLinkUrl] = useState('');
 
-   
   const [loggedInUser, setLoggedInUser] = useState('');
   const [userId, setUserId] = useState(null);
   const [user, setUser] = useState('');
@@ -138,9 +137,10 @@ const newLinksJSON = JSON.stringify(newLinks);
             type="text" className='text-black w-full border-transparent outline-none focus:border-transparent focus:ring-0'/>
             </div>
         </div>
+        
         {/* Links */}
         <div className='mt-10 text-left'>
-        {/* Contact */}
+        {/* Recommended */}
         <div className='text-left w-full mb-1'>
           <h2 className='text-md font-semibold text-[#013941]'>Recommended</h2>
           <div className='w-full grid grid-cols-5 gap-3'>
@@ -167,10 +167,10 @@ const newLinksJSON = JSON.stringify(newLinks);
               <div onClick={() => handleLinkClick('WeChat')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
                 <img className='h-14 w-14 rounded-xl shadow-xl' src={WeChat} alt="" />
                 <p className='text-xs mt-1'>WeChat</p>
-              </div> 
-                     
+              </div>              
           </div>
         </div>
+
         {/* Social */}
         <div className='text-left w-full mt-4 mb-1'>
           <h2 className='text-md font-semibold text-[#013941]'>Social</h2>
@@ -249,6 +249,7 @@ const newLinksJSON = JSON.stringify(newLinks);
               </div> 
           </div>
         </div>
+
         {/* Business */}
         <div className='text-left w-full mt-4 mb-1'>
           <h2 className='text-md font-semibold text-[#013941]'>Business</h2>

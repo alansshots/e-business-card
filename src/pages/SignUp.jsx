@@ -25,6 +25,8 @@ function SignUp() {
       }
     )
 
+    navigate('/successful-registration')
+
     if(error){
       setNewRegistration(false);
       console.log(error)
@@ -43,25 +45,6 @@ function SignUp() {
 }
   return (
     <>
-    <Navbar/>
-    {(function() {
-  if (newRegistration == true) {
-       return (
-          <>
-              <RegistrationSuccess/>
-          </>
-       );
-   } 
-    
-   if (newRegistration == false){
-       return (
-          <>
-              <RegistrationFailure/>
-          </>
-       );
-
-  }
-})()}
     <div className='max-w-xl m-auto'>
       <div className='flex flex-col justify-center items-center'>
           <h2 className='text-[#013941] mt-10 mb-3 text-6xl'>Sign Up</h2>
@@ -69,7 +52,7 @@ function SignUp() {
           
           <form action="" className="mt-10 flex flex-col items-center justify-center w-full ">
               <div className="w-4/5">
-              <div className=' w-full flex flex-row justify-center items-center'> 
+              {/* <div className=' w-full flex flex-row justify-center items-center'> 
                     
                     <button type="button" class="text-sm mx-1 py-2 px-4 flex justify-center items-center border-2 border-black text-red-700 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none rounded-lg ">
                         <svg width="20" height="20" fill="currentColor" class="mr-2" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
@@ -87,9 +70,9 @@ function SignUp() {
                         Sign up with Facebook
                     </button>
          
-                  </div>
+                  </div> */}
 
-                <p className='mb-5 mt-6 font-semibold text-[#013941]'>OR</p> 
+                {/* <p className='mb-5 mt-6 font-semibold text-[#013941]'>OR</p>  */}
 
                 <label htmlFor="Email" className="block flex text-sm font-semibold text-gray-700">
                   E-mail Address
