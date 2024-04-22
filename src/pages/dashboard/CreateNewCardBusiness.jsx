@@ -75,7 +75,6 @@ function CreateNewCardPersonal() {
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
   const [card, setCard] = useState('');
 
-
   // Function to toggle the visibility of the popup
   const togglePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
@@ -126,10 +125,9 @@ function CreateNewCardPersonal() {
 
   const submitCard = async () => {
     const date = new Date().toLocaleDateString();
-    try {
       const { data, error } = await supabase
         .from('cards')
-        .update([
+        .upsert([
           {
             user_id: userId,
             email: loggedInUser.email,
@@ -145,17 +143,11 @@ function CreateNewCardPersonal() {
         ])
         .eq('user_id', userId);
 
-      if (error) {
-        throw new Error(`Error updating card: ${error.message}`);
-      } else {
         console.log('Card updated successfully:', data);
         setSelectedProfileImage(data[0].profile_img_url);
         setSelectedCoverImage(data[0].bg_img_url);
         setCard(data[0]);
-      }
-    } catch (error) {
-      console.error('Error updating card:', error.message);
-    }
+
   };
 
     // Profile Imgage Change 
@@ -317,7 +309,7 @@ function CreateNewCardPersonal() {
                 onMouseLeave={() => setIsHoveredCover(false)}
                 class="flex flex-col items-center justify-center h-full w-full">
                   <img
-                    src={selectedCoverImage || user.bg_img_url}
+                    src={selectedCoverImage || user.bg_img_url || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'}
                     className='rounded-md'
                     style={{
                       // cursor: loggedInUser.id === user.id ? "pointer" : "default",
@@ -449,7 +441,7 @@ function CreateNewCardPersonal() {
         </div>
         </div>
         
-        {isPopUpOpen && <LinkSearch onClose={togglePopUp} updateLinks={updateLinks}  />}
+        {isPopUpOpen && <LinkSearch onClose={togglePopUp} updateLinks={updateLinks} />}
         {isQRPopUpOpen && <CardQRPopUp onCloseQR={toggleQRPopUp} cardId={card.card_id}/>}
     </div>
   )
