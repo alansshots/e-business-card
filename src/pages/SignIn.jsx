@@ -32,7 +32,7 @@ function SignIn() {
 
   return (
     <>
-    {/* <Navbar/> */}
+    <Navbar/> 
     <div className='max-w-xl m-auto mb-10'>
       <div className='flex flex-col justify-center items-center'>
           <h2 className='text-[#013941] mt-10 mb-3 text-6xl'>Sign In</h2>
@@ -78,8 +78,8 @@ function SignIn() {
                   Sign In
                 </div>
 
-                {/* <p className='my-5 font-semibold text-[#013941]'>OR</p> */}
-{/* 
+                <p className='my-5 font-semibold text-[#013941]'>OR</p>
+
                 <div className=' w-full flex flex-row justify-center items-center mb-5'> 
                   <button type="button" class="hover:scale-95 duration-200 text-sm mx-1 py-2 px-4 flex justify-center items-center border-2 border-black text-red-700 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none rounded-lg ">
                       <svg width="20" height="20" fill="currentColor" class="mr-2" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
@@ -96,7 +96,7 @@ function SignIn() {
                       </svg>
                       Sign in with Facebook
                   </button>
-                </div> */}
+                </div>
               
               </div> 
             </form>

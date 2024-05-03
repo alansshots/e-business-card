@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 function Pricing() {
   return (
     <section id="Pricing" className="text-gray-600 body-font overflow-hidden">
-      <div className="container px-5 py-24 mx-auto">
+      <div className="container px-5 py-14 mx-auto">
         <div className="flex flex-col text-center w-full mb-10">
-          <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Pricing</h1>
+          <h1 className='text-[#013941] mt-10 text-6xl'>PRICING</h1>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">Whatever you want we have a plan for you.</p>
         </div>
         <div className="flex justify-center flex-wrap w-full">
