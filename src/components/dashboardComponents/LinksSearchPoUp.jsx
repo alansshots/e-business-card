@@ -14,6 +14,7 @@ import GitHub from '../../assets/icons/GitHub.png'
 import Instagram from '../../assets/icons/Instagram.png'
 import Line from '../../assets/icons/Line.png'
 import LinkedIn from '../../assets/icons/Linkedin.png'
+import OnlyFans from '../../assets/icons/OnlyFans.png'
 import Pinterest from '../../assets/icons/Pinterest.png'
 import Reddit from '../../assets/icons/Reddit.png'
 import Signal from '../../assets/icons/Signal.png'
@@ -127,23 +128,23 @@ const newLinksJSON = JSON.stringify(newLinks);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="bg-white rounded-xl w-2/3 h-4/5 overflow-y-auto relative p-6">
+      <div className="bg-white rounded-xl md:sw-2/3 h-4/5 overflow-y-auto relative p-6">
       <button className="absolute top-0 left-0 mt-4 ml-4 text-md text-[#013941] cursor-pointer" onClick={onClose}><X/></button>
         <div className="flex flex-col justify-center items-center">            
-        <div id="SearchBar" className='w-1/2'>
-        <div className='flex flex-row justify-around items-center bg-white border-2 border-gray-50   rounded-3xl p-2 mt-4 shadow-md transition duration-200 hover:shadow-xl'>
+        {/* <div id="SearchBar" className='md:w-1/2'>
+        <div className='flex flex-row justify-around items-center bg-white border-2 border-gray-50 rounded-3xl p-2 mt-4 shadow-md transition duration-200 hover:shadow-xl'>
             <Search className='text-black mx-2'/>
             <input
             type="text" className='text-black w-full border-transparent outline-none focus:border-transparent focus:ring-0'/>
             </div>
-        </div>
+        </div> */}
         
         {/* Links */}
         <div className='mt-10 text-left'>
         {/* Recommended */}
         <div className='text-left w-full mb-1'>
-          <h2 className='text-md font-semibold text-[#013941]'>Recommended</h2>
-          <div className='w-full grid grid-cols-5 gap-3'>
+          <h2 className='text-md font-semibold text-[#013941] my-1'>Recommended</h2>
+          <div className='w-full grid grid-cols-3 md:grid-cols-5 gap-3'>
               <div onClick={() => handleLinkClick('GitHub')} className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
                 <img className='h-14 w-14 rounded-xl shadow-xl' src={GitHub} alt="" />
                 <p className='text-xs mt-1'>GitHub</p>
@@ -162,7 +163,7 @@ const newLinksJSON = JSON.stringify(newLinks);
               </div>
               <div onClick={() => handleLinkClick('WhatsApp')} className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
                 <img className='h-14 w-14 rounded-xl shadow-xl' src={WhatsApp} alt="" />
-                <p className='text-xs mt-1'>WatsApp</p>
+                <p className='text-xs mt-1'>WhatsApp</p>
               </div> 
               <div onClick={() => handleLinkClick('WeChat')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
                 <img className='h-14 w-14 rounded-xl shadow-xl' src={WeChat} alt="" />
@@ -173,8 +174,8 @@ const newLinksJSON = JSON.stringify(newLinks);
 
         {/* Social */}
         <div className='text-left w-full mt-4 mb-1'>
-          <h2 className='text-md font-semibold text-[#013941]'>Social</h2>
-          <div className='w-full grid grid-cols-5 gap-3'>
+          <h2 className='text-md font-semibold text-[#013941] my-1'>Social</h2>
+          <div className='w-full grid grid-cols-3 md:grid-cols-5 gap-3'>
              <div onClick={() => handleLinkClick('DeviantArt')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
               <img className='h-14 w-14  rounded-xl shadow-xl' src={DeviantArt} alt="" />
               <p className='text-xs mt-1'>DeviantArt</p>
@@ -227,9 +228,9 @@ const newLinksJSON = JSON.stringify(newLinks);
                 <img className='h-14 w-14  rounded-xl shadow-xl' src={Tumblr} alt="" />
                 <p className='text-xs mt-1'>Tumblr</p>
               </div> 
-               <div onClick={() => handleLinkClick('Twitter')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
-                <img className='h-14 w-14  rounded-xl shadow-xl' src={Twitter} alt="" />
-                <p className='text-xs mt-1'>Twitter</p>
+               <div onClick={() => handleLinkClick('OnlyFans')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+                <img className='h-14 w-14  rounded-xl shadow-xl' src={OnlyFans} alt="" />
+                <p className='text-xs mt-1'>Only Fans</p>
               </div> 
                <div onClick={() => handleLinkClick('Youtube')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
                 <img className='h-14 w-14  rounded-xl shadow-xl' src={Youtube} alt="" />
@@ -252,8 +253,8 @@ const newLinksJSON = JSON.stringify(newLinks);
 
         {/* Business */}
         <div className='text-left w-full mt-4 mb-1'>
-          <h2 className='text-md font-semibold text-[#013941]'>Business</h2>
-          <div className='w-full grid grid-cols-5 gap-3'>
+          <h2 className='text-md font-semibold text-[#013941] my-1'>Business</h2>
+          <div className='w-full grid grid-cols-3 md:grid-cols-5 gap-3'>
              <div onClick={() => handleLinkClick('LinkedIn')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
               <img className='h-14 w-14  rounded-xl shadow-xl' src={LinkedIn} alt="" />
               <p className='text-xs mt-1'>LinkedIn</p>
@@ -266,7 +267,7 @@ const newLinksJSON = JSON.stringify(newLinks);
 
         {showAddLinkPopup && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="bg-white rounded-xl w-2/3 h-4/5 overflow-y-auto relative p-6">
+          <div className="bg-white rounded-xl w-full md:w-2/3 h-4/5 overflow-y-auto relative p-6">
             <button className="absolute top-4 left-4 text-gray-500 hover:text-gray-700" onClick={handleGoBack}><ArrowLeft/></button>
             <h2 className="text-xl font-semibold text-[#013941] mb-4 ">Add Link</h2>
             <form className="text-left" onSubmit={handleAddLink}  >

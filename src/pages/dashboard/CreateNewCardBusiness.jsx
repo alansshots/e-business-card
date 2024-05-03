@@ -17,6 +17,7 @@ import GitHub from '../../assets/icons/GitHub.png'
 import Instagram from '../../assets/icons/Instagram.png'
 import Line from '../../assets/icons/Line.png'
 import LinkedIn from '../../assets/icons/Linkedin.png'
+import OnlyFans from '../../assets/icons/OnlyFans.png'
 import Pinterest from '../../assets/icons/Pinterest.png'
 import Reddit from '../../assets/icons/Reddit.png'
 import Signal from '../../assets/icons/Signal.png'
@@ -41,6 +42,7 @@ const socialMediaIcons = {
   Instagram: Instagram,
   Line: Line,
   LinkedIn: LinkedIn,
+  OnlyFans: OnlyFans,
   Pinterest: Pinterest,
   Reddit: Reddit,
   Signal: Signal,
@@ -251,14 +253,14 @@ function CreateNewCardPersonal() {
   return (
     <div className='flex flex-col items-center justify-center'>
         <div className='mt-2 flex flex-row items-center justify-around w-full'>
-          <div className='w-full mx-10'>
+          <div className='w-full md:mx-10'>
             <div className='flex flex-row justify-between items-center'>
             {/* Photos */}
             <div class="flex flex-col items-center justify-center">
               <p className='mb-1 text-gray-600'>Profile Picture</p>
                 <label htmlFor="profile-img-upload" className="flex flex-col items-center justify-center  rounded-full cursor-pointer bg-gray-50" >
                 <div
-                  className="w-36 h-36 border-2 border-gray-200 rounded-full overflow-hidden"
+                  className="w-28 h-28 md:w-36 md:h-36 border-2 border-gray-200 rounded-full overflow-hidden"
                   style={{ position: 'relative' }}
                   onMouseEnter={() => setIsHoveredProfile(true)}
                   onMouseLeave={() => setIsHoveredProfile(false)}
@@ -302,7 +304,7 @@ function CreateNewCardPersonal() {
 
             <div class="flex flex-col items-center justify-center w-3/5">
             <p className='mb-1 text-gray-600'>Cover Photo</p>
-                <label htmlFor="cover-img-upload" className="flex flex-col items-center justify-center w-full h-44 border-2 border-gray-200 rounded-lg cursor-pointer bg-gray-50">
+                <label htmlFor="cover-img-upload" className="flex flex-col items-center justify-center w-full h-34 md:h-44 border-2 border-gray-200 rounded-lg cursor-pointer bg-gray-50">
                 <div 
                 style={{ position: 'relative' }}
                 onMouseEnter={() => setIsHoveredCover(true)}
@@ -366,15 +368,15 @@ function CreateNewCardPersonal() {
                     <input value={bio} onChange={e => setBio(e.target.value)} type="text" id="Bio" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" required />
                 </div>
 
-                <div className='text-left '>
+                <div className='text-left'>
                   <p className='font-semibold'>Links</p>
                   <div className='w-full flex flex-wrap flex-row justify-start items-start mt-5'>
-                    <a onClick={togglePopUp} className='mr-8 mb-2 flex flex-col flex-center items-center'>
+                    <a onClick={togglePopUp} className='mr-6 md:mr-8 mb-2 flex flex-col flex-center items-center'>
                       <Plus className='h-20 w-20 p-3 hover:scale-95 duration-200 cursor-pointer bg-white rounded-xl border-2 border-gray-50 shadow-xl'/>
                     </a>
                     {
                       links.map((link, index) => (
-                        <div key={index} className='mr-8 mb-2 flex flex-col flex-center items-center relative'>
+                        <div key={index} className='mr-6 md:mr-8 mb-2 flex flex-col flex-center items-center relative'>
                           <img src={socialMediaIcons[link.name]} className='h-20 w-20  bg-white rounded-xl border-2 border-gray-50 shadow-xl' />
                           <p className='text-xs mt-1'>{link.name}</p>
                           <button className="shadow-xl hover:scale-95 duration-200 cursor-pointer absolute top-0 right-0 mt-1 mr-1 p-1 text-red-600 rounded-full bg-white" onClick={() => handleRemoveLink(index)}>
@@ -387,7 +389,7 @@ function CreateNewCardPersonal() {
                 </div>
 
                 <div className='text-left'>
-                  <button onClick={() => { submitCard(); toggleQRPopUp(); }} type="button" className="mt-5 my-5 py-2 w-1/4 shadow-md bg-[#14B8A6] text-white text-xl rounded-full focus:outline-none">
+                  <button onClick={() => { submitCard(); toggleQRPopUp(); }} type="button" className="mt-5 my-5 py-2 w-1/2 md:w-1/4 shadow-md bg-[#14B8A6] text-white text-xl rounded-full focus:outline-none">
                     Save
                   </button>
                 </div>
@@ -396,7 +398,7 @@ function CreateNewCardPersonal() {
     
           </div>
         {/* Preview */}
-        <div className='border-2 border-gray-100 rounded-3xl shadow-2xl mr-10 min-w-[265px]'>
+        <div className='hidden md:block border-2 border-gray-100 rounded-3xl shadow-2xl mr-10 min-w-[265px]'>
           <div className='flex flex-row justify-center items-center'>
           <div className='w-full'>
             <div className='relative'>

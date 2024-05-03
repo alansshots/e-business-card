@@ -53,7 +53,7 @@ function DashNav() {
    }
   return (
     <>
-        <aside id="sidebar" class="fixed shadow-xl z-20 h-full top-0 left-0 pt-6 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75" aria-label="Sidebar">
+        <aside id="sidebar" class="hidden fixed shadow-xl z-20 h-full top-0 left-0 pt-6 flex lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75" aria-label="Sidebar">
         <div class="flex items-center justify-start mb-5 mx-2 ">
           <button id="toggleSidebarMobile" aria-expanded="true" aria-controls="sidebar" class="lg:hidden mr-2 text-gray-600 hover:text-gray-900 cursor-pointer p-2 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100 rounded">
             <svg id="toggleSidebarMobileHamburger" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -133,3 +133,6 @@ function DashNav() {
 }
 
 export default DashNav
+
+
+
