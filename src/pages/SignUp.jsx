@@ -13,11 +13,13 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [newRegistration, setNewRegistration] = useState(null);
 
 
   async function submitUserData() {
-    if(password == confirmPassword) {
+    if(password == confirmPassword && password !== null && email !== null) {
+      setIsLoading(true);  
     const { error } = await supabase.auth.signUp(
       {
         email: email,
@@ -120,7 +122,7 @@ function SignUp() {
 
               <div className="w-4/5 ">
                 <button onClick={submitUserData} type='button' className="cursor-pointer w-full mt-5 py-2 w-4/5 bg-[#14B8A6] text-white text-xl rounded-full focus:outline-none focus:ring ">
-                  Sign Up
+                  {isLoading ? 'Signing Up...' : 'Sign Up'}
                 </button>
                 <p className="text-xs mt-1 text-gray-500">
                   By creating an account, you agree to Google's 
