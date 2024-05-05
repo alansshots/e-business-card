@@ -131,13 +131,13 @@ const newLinksJSON = JSON.stringify(newLinks);
       <div className="bg-white rounded-xl md:sw-2/3 h-4/5 overflow-y-auto relative p-6">
       <button className="absolute top-0 left-0 mt-4 ml-4 text-md text-[#013941] cursor-pointer" onClick={onClose}><X/></button>
         <div className="flex flex-col justify-center items-center">            
-        {/* <div id="SearchBar" className='md:w-1/2'>
+        <div id="SearchBar" className='md:w-full'>
         <div className='flex flex-row justify-around items-center bg-white border-2 border-gray-50 rounded-3xl p-2 mt-4 shadow-md transition duration-200 hover:shadow-xl'>
             <Search className='text-black mx-2'/>
             <input
             type="text" className='text-black w-full border-transparent outline-none focus:border-transparent focus:ring-0'/>
             </div>
-        </div> */}
+        </div>
         
         {/* Links */}
         <div className='mt-10 text-left'>

@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Plus, Edit, Trash2, X} from 'react-feather';
+import { Plus, Edit, LogOut, X} from 'react-feather';
 import supabase from '../../config/supabaseClient'
 
 import LinkSearch from '../../components/dashboardComponents/LinksSearchPoUp'
@@ -77,6 +77,14 @@ function CreateNewCardPersonal() {
   const [selectedCoverImage, setSelectedCoverImage] = useState(null);
   const [card, setCard] = useState('');
 
+  async function signOutUser() {
+    await supabase.auth.signOut();
+    setUser(null);
+    localStorage.setItem('accessToken', null);
+    navigate('/');
+    window.location.reload();
+  }
+
   // Function to toggle the visibility of the popup
   const togglePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
@@ -129,7 +137,7 @@ function CreateNewCardPersonal() {
     const date = new Date().toLocaleDateString();
       const { data, error } = await supabase
         .from('cards')
-        .upsert([
+        .update([
           {
             user_id: userId,
             email: loggedInUser.email,
@@ -388,10 +396,19 @@ function CreateNewCardPersonal() {
                 </div>
                 </div>
 
-                <div className='text-left'>
+                <div className='text-left flex flex-row justify-between items-center'>
                   <button onClick={() => { submitCard(); toggleQRPopUp(); }} type="button" className="mt-5 my-5 py-2 w-1/2 md:w-1/4 shadow-md bg-[#14B8A6] text-white text-xl rounded-full focus:outline-none">
                     Save
                   </button>
+                  
+                  <Link to='/sign-in' onClick={signOutUser} class="block sm:hidden cursor-pointer border-2 border-red-200 text-base text-gray-900 font-normal rounded-lg flex items-center p-2 group ">
+                  <LogOut className="w-6 h-6 text-[#013941] flex-shrink-0 transition duration-75"/>
+                  <div className='flex flex-col items-center justify-center w-full'> 
+                    <span class="ml-3 flex-1 whitespace-nowrap">Sign out</span>
+                    <span className='text-xs'>{user.email}</span>
+                  </div>
+                </Link>
+
                 </div>
 
             </div>
