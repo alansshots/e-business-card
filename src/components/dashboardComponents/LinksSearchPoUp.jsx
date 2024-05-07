@@ -228,10 +228,10 @@ const newLinksJSON = JSON.stringify(newLinks);
                 <img className='h-14 w-14  rounded-xl shadow-xl' src={Tumblr} alt="" />
                 <p className='text-xs mt-1'>Tumblr</p>
               </div> 
-               <div onClick={() => handleLinkClick('OnlyFans')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
+               {/* <div onClick={() => handleLinkClick('OnlyFans')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
                 <img className='h-14 w-14  rounded-xl shadow-xl' src={OnlyFans} alt="" />
                 <p className='text-xs mt-1'>Only Fans</p>
-              </div> 
+              </div>  */}
                <div onClick={() => handleLinkClick('Youtube')}  className='mx-4 mb-2 flex flex-col flex-center items-center hover:scale-95 hover:shadow-xs duration-200 cursor-pointer'>
                 <img className='h-14 w-14  rounded-xl shadow-xl' src={Youtube} alt="" />
                 <p className='text-xs mt-1'>Youtube</p>

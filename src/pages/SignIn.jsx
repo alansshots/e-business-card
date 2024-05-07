@@ -60,7 +60,7 @@ function SignIn() {
               <div className="w-4/5 mt-5">
                 <label htmlFor="Password" className="block flex flex-row justify-between  text-sm font-semibold text-gray-700">
                   Password
-                  <p className='cursor-pointer text-[#14B8A6]  hover:underline duration-200'>Forgot your password ?</p>
+                  {/* <p className='cursor-pointer text-[#14B8A6]  hover:underline duration-200'>Forgot your password ?</p> */}
                 </label>
 
                 <input
@@ -78,7 +78,7 @@ function SignIn() {
                   Sign In
                 </div>
 
-                <p className='my-5 font-semibold text-[#013941]'>OR</p>
+                {/* <p className='my-5 font-semibold text-[#013941]'>OR</p>
 
                 <div className=' w-full flex flex-row justify-center items-center mb-5'> 
                   <button type="button" class="hover:scale-95 duration-200 text-sm mx-1 py-2 px-4 flex justify-center items-center border-2 border-black text-red-700 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none rounded-lg ">
@@ -96,7 +96,7 @@ function SignIn() {
                       </svg>
                       Sign in with Facebook
                   </button>
-                </div>
+                </div> */}
               
               </div> 
             </form>
