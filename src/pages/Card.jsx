@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import supabase from '../config/supabaseClient';
 
+import logo from '../assets/logo-dark.png'
 import Behance from '../assets/icons/Behance.png'
 import DeviantArt from '../assets/icons/Deviantart.png'
 import Discord from '../assets/icons/Discord.png'
@@ -111,7 +112,7 @@ function Card() {
   return (
     <>
         <div className='flex flex-row justify-center items-center'>
-          <div className='sm:w-[500px]'>
+          <div className='w-full md:w-[500px]'>
             <div className='relative'>
               <div  style={{ clipPath: 'ellipse(85% 67% at 78% 22%)'}} className='bg-[#013941] h-72 w-full sm:rounded-3xl flex items-center justify-center relative overflow-hidden'>
                 <div className='absolute bg-cover bg-cenwter w-full h-full' style={{ backgroundImage: `url(${ card.bg_img_url || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'})` }}></div>
@@ -149,6 +150,12 @@ function Card() {
           </div>
           
           </div>
+            <div className='w-full flex flex-col justify-center items-center'>
+                <img src={logo} className='text-black w-1/4  mt-10' alt="Colorblock-logo"/> 
+                <p className='text-black text-sm w-2/3 mt-2 font-semibold opacity-50'>
+                  Go Digital, Share Everywhere, Make Every Connection Count.
+                </p>
+            </div>
           </div>
         </div>
     </>

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import supabase from '../../config/supabaseClient';
 import { User, Copy, ShoppingBag, FastForward, LogOut } from 'react-feather'
-import Logo from '../../assets/logo.png'
+import Logo from '../../assets/logo-dark.png'
 
 function DashNav() {
    const [isHovered, setIsHovered] = useState(false);
@@ -64,8 +64,7 @@ function DashNav() {
             </svg>
           </button>
           <div class="text-xl font-bold flex items-center lg:ml-2.5">
-            <img src={Logo} class="h-6 mr-2" alt="Windster Logo"/>
-            <span class="self-center whitespace-nowrap">Colorblock</span>
+            <img src={Logo} class="h-8 mr-2" alt="Colorblock Logo"/>
           </div>
          </div>
          <div class="relative flex-1 flex flex-col min-h-0 shadow-xl bg-white pt-0 border-t-2 border-[#013941]">
@@ -84,12 +83,12 @@ function DashNav() {
                            <span class="ml-3 flex-1 whitespace-nowrap">My Card</span>
                         </Link>
                      </li>
-                     <li>
+                     {/* <li>
                         <Link class="cursor-pointer text-base text-gray-900 font-normal rounded-lg hover:bg-[#EFFAF5] flex items-center p-2 group ">
                            <ShoppingBag className="w-6 h-6 text-[#013941] flex-shrink-0 transition duration-75"/>
                            <span class="ml-3 flex-1 whitespace-nowrap">Accessories</span>
                         </Link>
-                     </li>
+                     </li> */}
                   </ul>
                   <div class="space-y-2 pt-2">
                   {/* <ul>

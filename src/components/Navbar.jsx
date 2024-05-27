@@ -1,15 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Logo from '../assets/logo.png'
+import Logo from '../assets/logo-dark.png'
 
 function Navbar() {
   return (
     <div id='Navbar' className='flex flex-row justify-between items-center border-b border-gray-300 shadow-md px-10 py-4'>
         <div>
             <Link to='/' className='cursor-pointer flex flex-row justify-center items-center'>
-                <img src={Logo} alt="logo" className='w-10 h-10'/>
-                <h2 className='font-semibold text-2xl'>Kartaa</h2>
+                <img src={Logo} alt="logo" className='h-10'/>
             </Link>
         </div>
         <div className='flex flex-row justify-between items-center'>
