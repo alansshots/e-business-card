@@ -32,6 +32,8 @@ function Banner() {
           </motion.div>
         </motion.div>
         </a>
+
+
       </div>
     </div>
   )

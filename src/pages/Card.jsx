@@ -143,15 +143,14 @@ function Card() {
                     ))
                 }
           </div>
-          
           <div className='mb-10 flex flex-col items-center justify-center'>
             <div onClick={() => handleAddContact()} className='cursor-pointer mt-10 w-4/5 text-center bg-[#013941] py-3 px-5 mx-2 text-2xl font-semibold text-white shadow-xl rounded-full'>Add Contact</div>
-            <Link to='/sign-up' className='mt-10  w-1/2 text-center bg-white text-black mx-2 shadow-xl border-2 border-black text-sm rounded-full'>Create your own E-card</Link>
+            <Link to='/sign-up' className='mt-10 w-1/2 text-center bg-white text-black mx-2 shadow-xl border-2 border-black text-sm rounded-full'>Create your own E-card</Link>
           </div>
           
           </div>
             <div className='w-full flex flex-col justify-center items-center'>
-                <img src={logo} className='text-black w-1/4  mt-10' alt="Colorblock-logo"/> 
+                <img src={logo} className='text-black w-1/4 mt-5' alt="Colorblock-logo"/> 
                 <p className='text-black text-sm w-2/3 mt-2 font-semibold opacity-50'>
                   Go Digital, Share Everywhere, Make Every Connection Count.
                 </p>
