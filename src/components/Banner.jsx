@@ -6,14 +6,14 @@ import Background from '../assets/E-Cards.png';
 function Banner() {
   return (
     <div className="flex flex-col items-center justify-center">
-      <h1 className="text-[#013941] tracking-widest mt-10 text-7xl">DIGITAL PERSONAL CARD</h1>
+      <h1 className="text-[#013941] font-semibold md:font-normal tracking-widest mt-5 md:mt-10 text-3xl md:text-7xl">DIGITAL PERSONAL CARD</h1>
       <div className="relative">
         <motion.img
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
           src={Background}
-          className="mt-[-30px]"
+          className="mt-[-15px] ]md:mt-[-30px]"
           alt="digital business cards blurred"
         />
         <a href="#Pricing">

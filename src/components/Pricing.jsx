@@ -5,13 +5,13 @@ import { motion } from 'framer-motion';
 function Pricing() {
   return (
     <section id="Pricing" className="text-gray-600 body-font overflow-hidden">
-      <div className="container px-5 py-14 mx-auto">
+      <div className="container px-5 md:py-14 mx-auto">
         <div className="flex flex-col text-center w-full mb-5">
           <h1 className='text-[#013941] mt-10 text-6xl'>PRICING</h1>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">Whatever you want we have a plan for you.</p>
         </div>
         <div class="flex flex-row justify-center items-center">
-    <div className='flex flex-row justify-around items-center'>
+    <div className='flex flex-col md:flex-row justify-around items-center'>
         <div type="button" class="blur-sm flex mr-1 items-center justify-center w-48 mt-3 text-white bg-black h-14 rounded-xl">
             <div class="mr-3">
                 <svg viewBox="0 0 384 512" width="30">
