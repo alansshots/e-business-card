@@ -14,15 +14,18 @@ function Footer() {
                 {/* <span class="self-center text-2xl font-semibold whitespace-nowrap">Kartaa</span> */}
             </a>
             <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-200 sm:mb-0 dark:text-gray-400">
-                {/* <li>
-                    <a href="#" class="hover:underline me-4 md:me-6">About</a>
-                </li> */}
+                <li>
+                    <Link to="/sign-up" class="hover:underline me-4 md:me-6">Sign Up</Link>
+                </li>
+                <li>
+                    <Link to="/sign-in" class="hover:underline me-4 md:me-6">Sign In</Link>
+                </li>
+                <li>
+                    <a href="#" class="hover:underline me-4 md:me-6">Accessories</a>
+                </li>
                 <li>
                     <a href="https://policies.google.com/privacy?hl=en-US" class="hover:underline me-4 md:me-6">Privacy Policy</a>
                 </li>
-                {/* <li>
-                    <a href="#" class="hover:underline me-4 md:me-6">Accessories</a>
-                </li> */}
             </ul>
         </div>
         <hr class="my-6 border-gray-600 sm:mx-auto lg:my-8" />

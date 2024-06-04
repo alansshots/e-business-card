@@ -33,7 +33,7 @@ function SignIn() {
   return (
     <>
     <Navbar/> 
-    <div className='max-w-xl m-auto mb-10'>
+    <div className='max-w-xl m-auto mb-10 my-[200px] md:my-[100px]'>
       <div className='flex flex-col justify-center items-center'>
           <h2 className='text-[#013941] mt-10 mb-3 text-6xl'>Sign In</h2>
           <p>Welcome back, we missed you!</p>

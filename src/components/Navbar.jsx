@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom'
 
 import Logo from '../assets/logo.png'
+import ContentLandingPage from './ContentLandingPage';
 
 function Navbar() {
     const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -44,7 +45,7 @@ function Navbar() {
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#191919"
+              stroke="#fff"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -65,24 +66,24 @@ function Navbar() {
           <nav className="flex-col flex-grow ">
             <ul className="flex flex-grow justify-end flex-wrap items-center">
               <li>
-                <a
-                  href="/"
+                <Link
+                 to=''
                   className="font-medium text-gray-100 hover:text-gray-400 px-5 py-3 flex items-center transition duration-150 ease-in-out"
                 >
-                  Careers
-                </a>
+                  Accessories
+                </Link>
               </li>
-              <li>
-                <a
-                  href="/"
+              {/* <li>
+                <Link
+                  
                   className="font-medium text-gray-100 hover:text-gray-400 px-5 py-3 flex items-center transition duration-150 ease-in-out"
                 >
-                  About Us
-                </a>
-              </li>
+                  News
+                </Link>
+              </li> */}
               <li>
                 <a
-                  className="inline-flex cursor-pointer hover:scale-95 items-center px-4 py-2 mt-2 font-semibold text-white transition duration-500 ease-in-out transform bg-transparent rounded-lg text-md md:mt-0 md:ml-4 bg-[#113941]"
+                  className="inline-flex cursor-pointer hover:scale-95 items-center px-4 py-2 mt-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg text-md md:mt-0 md:ml-4 bg-[#013941]"
                 >
                   <span className="justify-center">Download</span>
                   <svg

@@ -48,7 +48,7 @@ function SignUp() {
   return (
     <>
     <Navbar/>
-    <div className='max-w-xl m-auto'>
+    <div className='max-w-xl m-auto my-[100px]'>
       <div className='flex flex-col justify-center items-center'>
           <h2 className='text-[#013941] mt-10 mb-3 text-6xl'>Sign Up</h2>
           <p>Welcome! Let's create your digital business or personal card.</p>
